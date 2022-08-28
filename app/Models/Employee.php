@@ -13,9 +13,19 @@ class Employee extends Model
 
     protected $fillable = [
         "employee_id",
-        "employee_type_employee_type_id",
-        "resident_resident_id",
+        "resident_id",
+        "employee_type_id",
         "term_start",
         "term_end"
     ];
+
+    public function resident()
+    {
+        return $this->hasOne(Resident::class, "resident_id", "resident_id");
+    }
+
+    public function employee_type()
+    {
+        return $this->hasOne(EmployeeType::class, "employee_type_id", "employee_type_id");
+    }
 }

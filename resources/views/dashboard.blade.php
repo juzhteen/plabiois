@@ -5,7 +5,7 @@
         </h2>
 
         <!-- Cards -->
-        <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+        {{-- <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
             <!-- Card -->
             <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                 <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
@@ -72,10 +72,10 @@
                     </p>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- New Table -->
-        <div class="w-full overflow-hidden rounded-lg shadow-xs">
+        {{-- <div class="w-full overflow-hidden rounded-lg shadow-xs">
             <div class="w-full overflow-x-auto">
                 <table class="w-full whitespace-no-wrap">
                     <thead>
@@ -410,13 +410,13 @@
                     </nav>
                 </span>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Charts -->
-        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        {{-- <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
             Charts
-        </h2>
-        <div class="grid gap-6 mb-8 md:grid-cols-2">
+        </h2> --}}
+        {{-- <div class="grid gap-6 mb-8 md:grid-cols-2">
             <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
                 <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
                     Revenue
@@ -455,7 +455,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     {{-- <div class="py-12">
