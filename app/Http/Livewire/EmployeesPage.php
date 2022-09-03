@@ -8,6 +8,7 @@ use Livewire\WithPagination;
 use App\Models\Employee;
 use App\Models\Resident;
 use App\Models\EmployeeType;
+use Illuminate\Support\Str;
 
 class EmployeesPage extends Component
 {
@@ -90,13 +91,20 @@ class EmployeesPage extends Component
 
     public function store()
     {
+
+        // Generate employee code for attendance
+
+        $employee_code = "PLABIO-" . Str::random(4);
+
         Employee::updateOrCreate(
+            
             ["employee_id" => $this->employee_id],
             [
                 "resident_id" => $this->resident_id,
                 "employee_type_id" => $this->employee_type_id,
                 "term_start" => $this->term_start,
                 "term_end" => $this->term_end,
+                "employee_code" => $employee_code
             ]
         );
 

@@ -16,7 +16,8 @@ class Employee extends Model
         "resident_id",
         "employee_type_id",
         "term_start",
-        "term_end"
+        "term_end",
+        "employee_code"
     ];
 
     public function resident()
