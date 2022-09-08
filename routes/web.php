@@ -27,4 +27,5 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::view('residents', 'residents')->name('residents');
     Route::view('employees', 'employees')->name('employees');
     Route::view('employee-types', 'employee-types')->name('employee-types');
+    Route::view('attendance', 'attendance')->name('attendance');
 });
