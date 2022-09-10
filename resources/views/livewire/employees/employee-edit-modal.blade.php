@@ -7,13 +7,22 @@
         <form>
             <div class="mt-4 mb-6">
               <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                Modals
+                @php
+                    if($employee_id){
+                        echo "EDIT EMPLOYEE RECORD";
+                    }else{
+                        echo "ADD EMPLOYEE RECORD";
+                    }
+                @endphp
               </h2>
               <div class="relative z-9">
                 <label class="block text-sm mt-4">
+                    <span class="text-gray-700 dark:text-gray-400">
+                        Resident profile
+                    </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        placeholder="Search for the resident profile" type="text" wire:model="residentQuery" id="residentQuery" />
+                        placeholder="Search for the resident profile" type="text" wire:model="residentQuery" id="residentQuery" required/>
                 </label>
                 @if(!empty($residentQueryResult) && ($residentQuery != "" ))
                     <ul class="shadow-md absolute top-10 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -27,9 +36,12 @@
               </div>
               <div class="relative z-8">
                 <label class="block text-sm mt-4">
+                    <span class="text-gray-700 dark:text-gray-400">
+                        Position
+                    </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        placeholder="Search for position" type="text" wire:model="positionQuery" id="positionQuery" />
+                        placeholder="Search for position" type="text" wire:model="positionQuery" id="positionQuery" required/>
                 </label>
                 @if(!empty($positionQueryResult) && ($positionQuery != "" ))
                     <ul class="shadow-md absolute top-10 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
@@ -43,15 +55,21 @@
               </div>
 
               <label class="block text-sm mt-4">
+                <span class="text-gray-700 dark:text-gray-400">
+                    Start of term
+                </span>
                   <input
                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                      placeholder="Term Start" type="date" wire:model="term_start" id="term_start" />
+                      placeholder="Term Start" type="date" wire:model="term_start" id="term_start" required/>
               </label>
 
               <label class="block text-sm mt-4">
+                <span class="text-gray-700 dark:text-gray-400">
+                    End of term
+                </span>
                   <input
                       class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                      placeholder="Term End" type="date" wire:model="term_end" id="term_end" />
+                      placeholder="Term End" type="date" wire:model="term_end" id="term_end" required/>
               </label>
 
             </div>
@@ -63,7 +81,7 @@
                     Cancel
                 </button>
                 <button
-                    class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                    class="w-full px-5 py-3 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg sm:w-auto sm:px-4 sm:py-2 active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue"
                     wire:click.prevent="store()"
                    type="button">
                     Save

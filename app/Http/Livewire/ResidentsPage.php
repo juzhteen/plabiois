@@ -30,6 +30,7 @@ class ResidentsPage extends Component
     public function edit($resident_id)
     {
         $resident = Resident::findOrFail($resident_id);
+        $this->resident_id = $resident->resident_id;
         $this->name = $resident->name;
         $this->age = $resident->age;
         $this->gender = $resident->gender;
@@ -106,6 +107,13 @@ class ResidentsPage extends Component
     {
         $this->resident_id = null;
         $this->name = "";
+        $this->age = "";
+        $this->gender = "";
+        $this->civil_status = "";
+        $this->religion = "";
+        $this->weight = "";
+        $this->height = "";
+        $this->purok = "";
     }
 
 }
