@@ -27,7 +27,7 @@ class AttendancePage extends Component
 
     public function render()
     {
-      $attendances = Attendance::paginate(10);
+      $attendances = Attendance::whereDate("created_at", Carbon::today())->paginate(10);
       return view('livewire.attendance.attendance-page', ["attendances" => $attendances]);
     }
 

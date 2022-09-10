@@ -34,9 +34,9 @@
             </div>
             <div class="qr-scanner-controls mt-4">
                 <button type="button"
-                    class="qr-scanner-start px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Start</button>
+                    class="qr-scanner-start px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">Open QR scanner</button>
                 <button type="button"
-                    class="qr-scanner-stop px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">Stop</button>
+                    class="qr-scanner-stop px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg active:bg-red-600 hover:bg-red-700 focus:outline-none focus:shadow-outline-red">Close QR scanner</button>
             </div>
         </div>
         <div>
@@ -47,7 +47,7 @@
     </div>
 
     <!-- New Table -->
-    <div class="w-full overflow-hidden rounded-lg shadow-xs mt-8">
+    <div class="w-full overflow-hidden rounded-lg shadow-xl mt-8">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
@@ -62,7 +62,7 @@
                     @if($attendances->count())
                         @foreach($attendances as $attendance)
                             <tr class="text-gray-700 dark:text-gray-400">
-                                <td class="px-4 py-3">
+                                <td class="px-4 py-3 font-bold">
                                     {{ $attendance->employee->resident->name }}
                                 </td>
                                 <td class="px-4 py-3">

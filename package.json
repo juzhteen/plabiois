@@ -23,7 +23,6 @@
     "dependencies": {
         "alpinejs": "^2.8.1",
         "qr-scanner": "^1.4.1",
-        "turbolinks": "^5.2.0",
-        "webpack": "^5.74.0"
+        "turbolinks": "^5.2.0"
     }
 }
