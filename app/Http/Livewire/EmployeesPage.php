@@ -92,7 +92,6 @@ class EmployeesPage extends Component
 
     public function store()
     {
-
         if ($this->employee_id){
             Employee::updateOrCreate(
                 ["employee_id" => $this->employee_id],
@@ -113,8 +112,9 @@ class EmployeesPage extends Component
             $this->clear();
             $this->openEdit = false;
         }else{
+
              // Check if resident profile is already present
-            $resident_profile = Employee::where("resident_id", $this->resident_id)->first();
+            $resident_profile = Employee::where("resident_resident_id", $this->resident_id)->first();
 
             if($resident_profile){
 
@@ -133,8 +133,9 @@ class EmployeesPage extends Component
                     Employee::updateOrCreate(
                         ["employee_id" => $this->employee_id],
                         [
-                            "resident_id" => $this->resident_id,
-                            "employee_type_id" => $this->employee_type_id,
+                            "employee_id" => $this->employee_id,
+                            "resident_resident_id" => $this->resident_id,
+                            "employee_type_employee_type_id" => $this->employee_type_id,
                             "term_start" => $this->term_start,
                             "term_end" => $this->term_end,
                             "employee_code" => $employee_code
