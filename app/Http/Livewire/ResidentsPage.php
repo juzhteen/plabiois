@@ -11,7 +11,7 @@ class ResidentsPage extends Component
 {
     use WithPagination;
 
-    public $resident_id, $name, $age, $gender, $civil_status, $religion, $weight, $height, $purok;
+    public $resident_id, $name, $age, $gender, $civil_status, $religion, $weight, $height, $purok, $email_address, $phone_number;
     public $openEdit, $openDelete = false;
 
     public function render()
@@ -39,6 +39,8 @@ class ResidentsPage extends Component
         $this->weight = $resident->weight;
         $this->height = $resident->height;
         $this->purok = $resident->purok;
+        $this->email_address = $resident->email_address;
+        $this->phone_number = $resident->phone_number;
         $this->openEdit = true;
     }
 
@@ -61,6 +63,8 @@ class ResidentsPage extends Component
                 "weight" => $this->weight,
                 "height" => $this->height,
                 "purok" => $this->purok,
+                "email_address" => $this->email_address,
+                "phone_number" => $this->phone_number
             ]
         );
 
@@ -114,6 +118,8 @@ class ResidentsPage extends Component
         $this->weight = "";
         $this->height = "";
         $this->purok = "";
+        $this->email_address = "";
+        $this->phone_number = "";
     }
 
 }

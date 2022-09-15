@@ -49,6 +49,8 @@
               <th class="px-4 py-3">Weight</th>
               <th class="px-4 py-3">Height</th>
               <th class="px-4 py-3">Purok</th>
+              <th class="px-4 py-3">Email address</th>
+              <th class="px-4 py-3">Phone number</th>
               <th class="px-4 py-3">Actions</th>
             </tr>
           </thead>
@@ -79,6 +81,12 @@
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $resident->purok }}
+                  </td>
+                  <td class="px-4 py-3 text-sm">
+                    {{ $resident->email_address }}
+                  </td>
+                  <td class="px-4 py-3 text-sm">
+                    {{ $resident->phone_number }}
                   </td>
                   <td class="px-4 py-2">
                     <button wire:click.prevent="edit({{ $resident->resident_id }})"
