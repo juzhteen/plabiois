@@ -58,6 +58,7 @@
               <th class="px-4 py-3">Position</th>
               <th class="px-4 py-3">Term Start</th>
               <th class="px-4 py-3">Term End</th>
+              <th class="px-4 py-3">Actions</th>
             </tr>
           </thead>
           <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
