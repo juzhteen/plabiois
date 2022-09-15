@@ -20,7 +20,9 @@ class Resident extends Model
         "religion",
         "weight",
         "height",
-        "purok"
+        "purok",
+        "email_address",
+        "phone_number"
     ];
     
 }

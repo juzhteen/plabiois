@@ -35,3 +35,8 @@ body {
   stroke-width: 15 !important;
   stroke-dasharray: none !important;
 }
+
+.resident-edit-modal {
+  max-height: 700px !important;
+  overflow-y: auto !important;
+}

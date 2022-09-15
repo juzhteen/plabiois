@@ -49636,6 +49636,11 @@ body {
   stroke-dasharray: none !important;
 }
 
+.resident-edit-modal {
+  max-height: 700px !important;
+  overflow-y: auto !important;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;
