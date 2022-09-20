@@ -15,8 +15,8 @@ class EmployeesPage extends Component
     use WithPagination;
 
     public $name;
-    public $employee_id, $resident_id, $employee_type_id, $term_start, $term_end;
-    public $openEdit, $openDelete = false;
+    public $employee_id, $resident_id, $employee_type_id, $term_start, $term_end, $emp_code;
+    public $openEdit, $openDelete, $openQr = false;
     public $residentQuery, $residentQueryResult;
     public $positionQuery, $positionQueryResult;
 
@@ -192,6 +192,22 @@ class EmployeesPage extends Component
         $this->term_end = "";
         $this->residentQuery = "";
         $this->positionQuery = "";
+    }
+
+    // QR
+
+    public function openQrModal($employee_id)
+    {
+        $employee = Employee::findOrFail($employee_id);
+        $this->emp_code = $employee->employee_code;
+        $this->openQr = true;
+
+    }
+
+    public function closeQrModal()
+    {
+        $this->clear();
+        $this->openQr = false;
     }
 
 
