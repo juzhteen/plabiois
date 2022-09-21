@@ -25,7 +25,7 @@
                         placeholder="Search for the resident profile" type="text" wire:model="residentQuery" id="residentQuery" required/>
                 </label>
                 @if(!empty($residentQueryResult) && ($residentQuery != "" ))
-                    <ul class="shadow-md absolute top-10 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <ul class="shadow-md absolute z-10 top-10 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         @foreach ($residentQueryResult as $resident)
                             <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600 cursor-pointer"
                             wire:click.prevent="setResidentProfile({{ $resident }})"
@@ -44,7 +44,7 @@
                         placeholder="Search for position" type="text" wire:model="positionQuery" id="positionQuery" required/>
                 </label>
                 @if(!empty($positionQueryResult) && ($positionQuery != "" ))
-                    <ul class="shadow-md absolute top-10 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                    <ul class="shadow-md absolute z-10 top-10 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         @foreach ($positionQueryResult as $position)
                             <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600 cursor-pointer"
                             wire:click.prevent="setPosition({{ $position }})"

@@ -10,10 +10,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/tailwind.output.css') }}" />
-    <script src="{{ asset('js/alpine.min.js') }}"></script>
+    <script src="{{ asset('js/alpine.min.js') }}" defer></script>
     <script src="{{ asset('js/init-alpine.js') }}" defer></script>
+    <script src="{{ asset('js/livewire-turbolinks.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     @livewireStyles

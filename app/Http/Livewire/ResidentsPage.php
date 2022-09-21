@@ -14,6 +14,19 @@ class ResidentsPage extends Component
     public $resident_id, $name, $age, $gender, $civil_status, $religion, $weight, $height, $purok, $email_address, $phone_number;
     public $openEdit, $openDelete = false;
 
+    protected $rules = [
+        'name' => 'required',
+        'age' => 'required',
+        'gender' => 'required',
+        'civil_status' => 'required',
+        'religion' => 'required',
+        'weight' => 'required',
+        'height' => 'required',
+        'purok' => 'required',
+        'email_address' => 'required',
+        'phone_number' => 'required'
+    ];
+
     public function render()
     {
         $residents = Resident::paginate(
@@ -52,6 +65,9 @@ class ResidentsPage extends Component
 
     public function store()
     {
+
+        $this->validate();
+
         Resident::updateOrCreate(
             ["resident_id" => $this->resident_id],
             [
@@ -67,14 +83,8 @@ class ResidentsPage extends Component
                 "phone_number" => $this->phone_number
             ]
         );
-
-        session()->flash(
-            "message",
-            $this->resident_id
-                ? "Resident record updated successfully."
-                : "Resident record created successfully."
-        );
-
+        $this->resident_id ? $this->dispatchBrowserEvent("resident_updated") : $this->dispatchBrowserEvent("resident_added");
+        $this->clear();
         $this->openEdit = false;
     }
 
@@ -103,6 +113,7 @@ class ResidentsPage extends Component
     {
         Resident::findOrFail($this->resident_id)->delete();
         session()->flash("warning", "Resident deleted successfully");
+        $this->dispatchBrowserEvent("resident_deleted");
         $this->clear();
         $this->closeDeleteModal();
     }
