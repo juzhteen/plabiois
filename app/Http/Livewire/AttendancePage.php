@@ -53,6 +53,7 @@ class AttendancePage extends Component
               if($this->attendance_type == 'time_out'){
                 $latest_attendance->time_out = $currentDateTime;
                 $latest_attendance->save();
+                $this->dispatchBrowserEvent("attendance_out");
                 $this->attendance_saved = true;
               }
             }else{
@@ -66,6 +67,7 @@ class AttendancePage extends Component
                 "time_in" => $currentDateTime
             ]
           );
+          $this->dispatchBrowserEvent("attendance_in");
            $this->attendance_saved = true;
         }
       }

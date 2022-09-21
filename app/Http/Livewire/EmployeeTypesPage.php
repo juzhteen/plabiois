@@ -15,6 +15,10 @@ class EmployeeTypesPage extends Component
     public $employee_type_id, $position;
     public $openEdit, $openDelete = false;
 
+    protected $rules = [
+        'position' => 'required'
+    ];
+
     public function render()
     {
         $employee_types = EmployeeType::paginate(
@@ -44,20 +48,14 @@ class EmployeeTypesPage extends Component
 
     public function store()
     {
-      EmployeeType::updateOrCreate(
+        $this->validate();
+        EmployeeType::updateOrCreate(
             ["employee_type_id" => $this->employee_type_id],
             [
               "position" => $this->position,
             ]
         );
-
-        session()->flash(
-            "message",
-            $this->employee_type_id
-                ? "Employee type record updated successfully."
-                : "ResiEmployee typedent record created successfully."
-        );
-
+        $this->employee_type_id ? $this->dispatchBrowserEvent("employee_type_updated") : $this->dispatchBrowserEvent("employee_type_added");
         $this->openEdit = false;
     }
 
@@ -86,6 +84,7 @@ class EmployeeTypesPage extends Component
     {
         EmployeeType::findOrFail($this->employee_type_id)->delete();
         session()->flash("warning", "Employee type deleted successfully");
+        $this->dispatchBrowserEvent("employee_type_deleted");
         $this->clear();
         $this->closeDeleteModal();
     }

@@ -3,6 +3,8 @@
 @import 'tailwindcss/utilities';
 @import url('http://fonts.cdnfonts.com/css/google-sans');
 
+@import "node-snackbar/dist/snackbar.min.css";
+
 body {
   font-family: 'Product Sans', sans-serif;
   font-weight: 500;
@@ -39,4 +41,8 @@ body {
 .resident-edit-modal {
   max-height: 700px !important;
   overflow-y: auto !important;
+}
+
+#reader__dashboard_section {
+  display: none !important;
 }

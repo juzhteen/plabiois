@@ -20,6 +20,13 @@ class EmployeesPage extends Component
     public $residentQuery, $residentQueryResult;
     public $positionQuery, $positionQueryResult;
 
+    protected $rules = [
+        'resident_id' => 'required',
+        'employee_type_id' => 'required',
+        'term_start' => 'required',
+        'term_end' => 'required'
+    ];
+
     public function mount()
     {
         $this->residentQuery = "";
@@ -92,6 +99,7 @@ class EmployeesPage extends Component
 
     public function store()
     {
+
         if ($this->employee_id){
             Employee::updateOrCreate(
                 ["employee_id" => $this->employee_id],
@@ -103,12 +111,8 @@ class EmployeesPage extends Component
                 ]
             );
     
-            session()->flash(
-                "message",
-                $this->employee_id
-                    ? "Resident record updated successfully."
-                    : "Resident record created successfully."
-            );
+            $this->employee_id ? $this->dispatchBrowserEvent("employee_updated") : $this->dispatchBrowserEvent("employee_added");
+            
             $this->clear();
             $this->openEdit = false;
         }else{
@@ -130,6 +134,8 @@ class EmployeesPage extends Component
                         "The generated employee code already exists. Please click save again to generate a new one."
                     );
                 }else{
+                    $this->validate();
+                    
                     Employee::updateOrCreate(
                         ["employee_id" => $this->employee_id],
                         [
@@ -142,12 +148,7 @@ class EmployeesPage extends Component
                         ]
                     );
             
-                    session()->flash(
-                        "message",
-                        $this->employee_id
-                            ? "Resident record updated successfully."
-                            : "Resident record created successfully."
-                    );
+                    $this->employee_id ? $this->dispatchBrowserEvent("employee_updated") : $this->dispatchBrowserEvent("employee_added");
                     $this->clear();
                     $this->openEdit = false;
                 }
@@ -179,7 +180,7 @@ class EmployeesPage extends Component
     public function delete()
     {
         Employee::findOrFail($this->employee_id)->delete();
-        session()->flash("warning", "Employee deleted successfully");
+        $this->dispatchBrowserEvent("employee_deleted");
         $this->closeDeleteModal();
     }
 
