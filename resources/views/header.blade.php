@@ -14,7 +14,7 @@
                   <a class="mr-5 hover:text-gray-900">Home</a>
                   <a class="mr-5 hover:text-gray-900">About us</a>
                   <a class="mr-5 hover:text-gray-900">Contact us</a>
-                  <a href="/request/docs" class="mr-5 hover:text-gray-900">Request document</a>
+                  <a href="/requests/forms" class="mr-5 hover:text-gray-900">Request document</a>
               </nav>
           </div>
       </header>

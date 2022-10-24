@@ -4,76 +4,114 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 
-use Livewire\WithPagination;
-use App\Models\Employee;
-use App\Models\EmployeeType;
+use App\Models\Request;
 
 class RequestsPage extends Component
 {
-    use WithPagination;
+    public $openDelete, $openAccept, $openComplete = false;
+    public $request_id;
 
-    public $employee_type_id, $position;
-    public $openEdit, $openDelete = false;
+    public $orderBy = "residents.name";
+    public $orderByOrder = "asc";
+    public $search = "";
+    public $searchBy;
+
+    public function mount()
+    {
+        $this->searchBy = "all";
+    }
 
     public function render()
     {
-        $employee_types = EmployeeType::paginate(
-            10
-        );
-        return view('livewire.requests.requests-page', ["employee_types" => $employee_types]);
+        $requests = $this->search
+            ? Request::where("residents.name", "like", "%" . $this->search . "%")
+                ->orWhere("forms.form_name", "like", "%" . $this->search . "%")
+                ->orWhere("request_date", "like", "%" . $this->search . "%")
+                ->orWhere("expiration_date", "like", "%" . $this->search . "%")
+                ->join(
+                    "residents",
+                    "requests.resident_resident_id",
+                    "=",
+                    "residents.resident_id"
+                )
+                ->join(
+                    "forms",
+                    "requests.form_form_id",
+                    "=",
+                    "forms.form_id"
+                )
+                ->orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10)
+            : Request::join(
+                "residents",
+                "requests.resident_resident_id",
+                "=",
+                "residents.resident_id"
+                )
+                ->join(
+                    "forms",
+                    "requests.form_form_id",
+                    "=",
+                    "forms.form_id"
+                )
+                ->orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10);
+
+        return view('livewire.requests.requests-page', ["requests" => $requests]);
     }
 
-    public function toggleEdit()
+    public function accept_request()
     {
-        $this->openEdit = true;
+        $request = Request::findOrFail($this->request_id);
+        $request->accepted = true;
+        $request->save();
+        $this->dispatchBrowserEvent("request_accepted");
+        $this->closeAcceptModal();
     }
 
-    public function edit($employee_type_id)
+    public function complete_request()
     {
-        $employee_type = EmployeeType::findOrFail($employee_type_id);
-        $this->employee_type_id = $employee_type->employee_type_id;
-        $this->position = $employee_type->position;
-        $this->openEdit = true;
+        $request = Request::findOrFail($this->request_id);
+        $request->completed = true;
+        $request->save();
+        $this->dispatchBrowserEvent("request_completed");
+        $this->closeCompleteModal();
     }
-
-    public function closeEditModal()
-    {
-        $this->clear();
-        $this->openEdit = false;
-    }
-
-    public function store()
-    {
-      EmployeeType::updateOrCreate(
-            ["employee_type_id" => $this->employee_type_id],
-            [
-              "position" => $this->position,
-            ]
-        );
-
-        session()->flash(
-            "message",
-            $this->employee_type_id
-                ? "Employee type record updated successfully."
-                : "ResiEmployee typedent record created successfully."
-        );
-
-        $this->openEdit = false;
-    }
-
-    //====================DELETE=================================
 
     public function openDeleteModal()
     {
         $this->openDelete = true;
     }
 
-    public function openDelete($employee_type_id)
+    public function openAcceptModal()
     {
-        $employee_type = EmployeeType::findOrFail($employee_type_id);
-        $this->employee_type_id = $employee_type->employee_type_id;
-        $this->employee_type = $employee_type->employee_type;
+        $this->openAccept = true;
+    }
+
+    public function openCompleteModal()
+    {
+        $this->openComplete = true;
+    }
+
+    public function openDelete($request_id)
+    {
+        $request = Request::findOrFail($request_id);
+        $this->request_id = $request->request_id;
         $this->openDeleteModal();
+    }
+
+    public function openAccept($request_id)
+    {
+        $request = Request::findOrFail($request_id);
+        $this->request_id = $request->request_id;
+        $this->openAcceptModal();
+    }
+
+    public function openComplete($request_id)
+    {
+        $request = Request::findOrFail($request_id);
+        $this->request_id = $request->request_id;
+        $this->openCompleteModal();
     }
 
     public function closeDeleteModal()
@@ -82,19 +120,34 @@ class RequestsPage extends Component
         $this->openDelete = false;
     }
 
+    public function closeAcceptModal()
+    {
+        $this->clear();
+        $this->openAccept = false;
+    }
+
+    public function closeCompleteModal()
+    {
+        $this->clear();
+        $this->openComplete = false;
+    }
+
     public function delete()
     {
-        EmployeeType::findOrFail($this->employee_type_id)->delete();
-        session()->flash("warning", "Employee type deleted successfully");
-        $this->clear();
+        Request::findOrFail($this->request_id)->delete();
+        $this->dispatchBrowserEvent("request_deleted");
         $this->closeDeleteModal();
     }
 
     public function clear()
     {
-        $this->employee_type_id = null;
-        $this->position = "";
+        $this->request_id = null;
     }
 
+    public function orderby($orderBy, $orderByOrder)
+    {
+        $this->orderBy = $orderBy;
+        $this->orderByOrder = $orderByOrder;
+    }
 
 }

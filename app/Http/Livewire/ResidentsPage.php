@@ -14,6 +14,11 @@ class ResidentsPage extends Component
     public $resident_id, $name, $age, $gender, $civil_status, $religion, $weight, $height, $purok, $email_address, $phone_number;
     public $openEdit, $openDelete = false;
 
+    public $orderBy = "name";
+    public $orderByOrder = "asc";
+    public $search = "";
+    public $searchBy;
+
     protected $rules = [
         'name' => 'required',
         'age' => 'required',
@@ -27,11 +32,29 @@ class ResidentsPage extends Component
         'phone_number' => 'required'
     ];
 
+    public function mount()
+    {
+        $this->searchBy = "all";
+    }
+
     public function render()
     {
-        $residents = Resident::paginate(
-            10
-        );
+        $residents = $this->search
+            ? Resident::where("name", "like", "%" . $this->search . "%")
+                ->orWhere("age", "like", "%" . $this->search . "%")
+                ->orWhere("gender", "like", "%" . $this->search . "%")
+                ->orWhere("civil_status", "like", "%" . $this->search . "%")
+                ->orWhere("religion", "like", "%" . $this->search . "%")
+                ->orWhere("weight", "like", "%" . $this->search . "%")
+                ->orWhere("height", "like", "%" . $this->search . "%")
+                ->orWhere("purok", "like", "%" . $this->search . "%")
+                ->orWhere("email_address", "like", "%" . $this->search . "%")
+                ->orWhere("phone_number", "like", "%" . $this->search . "%")
+                ->orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10)
+            : Resident::orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10);
+
         return view('livewire.residents.residents-page', ["residents" => $residents]);
     }
 
@@ -131,6 +154,12 @@ class ResidentsPage extends Component
         $this->purok = "";
         $this->email_address = "";
         $this->phone_number = "";
+    }
+
+    public function orderby($orderBy, $orderByOrder)
+    {
+        $this->orderBy = $orderBy;
+        $this->orderByOrder = $orderByOrder;
     }
 
 }

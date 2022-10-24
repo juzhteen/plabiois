@@ -20,6 +20,11 @@ class EmployeesPage extends Component
     public $residentQuery, $residentQueryResult;
     public $positionQuery, $positionQueryResult;
 
+    public $orderBy = "residents.name";
+    public $orderByOrder = "asc";
+    public $search = "";
+    public $searchBy;
+
     protected $rules = [
         'resident_id' => 'required',
         'employee_type_id' => 'required',
@@ -33,6 +38,8 @@ class EmployeesPage extends Component
         $this->residentQueryResult = [];
         $this->positionQuery = "";
         $this->positionQueryResult = [];
+
+        $this->searchBy = "all";
     }
 
     public function render()
@@ -45,7 +52,40 @@ class EmployeesPage extends Component
             $this->positionQueryResult = [];
         }
 
-        $employees = Employee::paginate(10);
+        $employees = $this->search
+            ? Employee::where("residents.name", "like", "%" . $this->search . "%")
+                ->orWhere("employee_types.position", "like", "%" . $this->search . "%")
+                ->orWhere("term_start", "like", "%" . $this->search . "%")
+                ->orWhere("term_end", "like", "%" . $this->search . "%")
+                ->join(
+                "residents",
+                "employees.resident_resident_id",
+                "=",
+                "residents.resident_id"
+                )
+                ->join(
+                    "employee_types",
+                    "employees.employee_type_employee_type_id",
+                    "=",
+                    "employee_types.employee_type_id"
+                )
+                ->orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10)
+            : Employee::join(
+                "residents",
+                "employees.resident_resident_id",
+                "=",
+                "residents.resident_id"
+                )
+                ->join(
+                    "employee_types",
+                    "employees.employee_type_employee_type_id",
+                    "=",
+                    "employee_types.employee_type_id"
+                )
+                ->orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10);
+
         return view('livewire.employees.employees-page', ["employees" => $employees]);
     }
 
@@ -209,6 +249,12 @@ class EmployeesPage extends Component
     {
         $this->clear();
         $this->openQr = false;
+    }
+
+    public function orderby($orderBy, $orderByOrder)
+    {
+        $this->orderBy = $orderBy;
+        $this->orderByOrder = $orderByOrder;
     }
 
 

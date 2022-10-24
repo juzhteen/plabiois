@@ -137,3 +137,35 @@ window.addEventListener("attendance_out", (event) => {
         duration: 10000,
     });
 });
+
+window.addEventListener("barangay_certification_empty_fields", (event) => {
+    Snackbar.show({
+        text: "Please fill in all fields!",
+        pos: "bottom-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("request_deleted", (event) => {
+    Snackbar.show({
+        text: "Request record deleted successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("request_accepted", (event) => {
+    Snackbar.show({
+        text: "Request record accepted successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("request_completed", (event) => {
+    Snackbar.show({
+        text: "Request record completed successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});

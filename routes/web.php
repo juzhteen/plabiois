@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GenerateFormController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,14 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/request/docs', function () {
-    return view('docsrequest');
-});
-
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
-
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
@@ -34,3 +28,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::view('attendance', 'attendance')->name('attendance');
     Route::view('requests', 'requests')->name('requests');
 });
+
+// UN-AUTHED ROUTES
+
+// Display request form
+Route::view('requests/forms', 'requests-forms')->name('requests-forms');
+
+// Display form to be printed
+Route::get('requests/{request_id}/preview', [GenerateFormController::class, 'index']);

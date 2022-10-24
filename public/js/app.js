@@ -4555,6 +4555,34 @@ window.addEventListener("attendance_out", function (event) {
     duration: 10000
   });
 });
+window.addEventListener("barangay_certification_empty_fields", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Please fill in all fields!",
+    pos: "bottom-right",
+    duration: 10000
+  });
+});
+window.addEventListener("request_deleted", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Request record deleted successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("request_accepted", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Request record accepted successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("request_completed", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Request record completed successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
 
 /***/ }),
 
