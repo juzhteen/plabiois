@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\Form;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +15,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
+        // Insert form types
+
+        $forms = [
+            "Barangay Certification",
+            "Barangay Clearance",
+            "Case Invitation",
+            "Certificate of Indigency",
+            "Certificate of Low Income"
+        ];
+
+        foreach ($forms as $form){
+            DB::table('forms')->insert([
+                "form_name" => $form
+            ]);
+        }
+        
     }
 }

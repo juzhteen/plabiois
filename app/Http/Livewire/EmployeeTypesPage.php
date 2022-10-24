@@ -15,15 +15,29 @@ class EmployeeTypesPage extends Component
     public $employee_type_id, $position;
     public $openEdit, $openDelete = false;
 
+    public $orderBy = "position";
+    public $orderByOrder = "asc";
+    public $search = "";
+    public $searchBy;
+
     protected $rules = [
         'position' => 'required'
     ];
 
+    public function mount()
+    {
+        $this->searchBy = "all";
+    }
+
     public function render()
     {
-        $employee_types = EmployeeType::paginate(
-            10
-        );
+        $employee_types = $this->search
+            ? EmployeeType::where("position", "like", "%" . $this->search . "%")
+                ->orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10)
+            : EmployeeType::orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10);
+
         return view('livewire.employee-types.employee-types-page', ["employee_types" => $employee_types]);
     }
 
@@ -93,6 +107,12 @@ class EmployeeTypesPage extends Component
     {
         $this->employee_type_id = null;
         $this->position = "";
+    }
+
+    public function orderby($orderBy, $orderByOrder)
+    {
+        $this->orderBy = $orderBy;
+        $this->orderByOrder = $orderByOrder;
     }
 
 
