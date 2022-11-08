@@ -22,9 +22,9 @@
 
 <body>
     @include('header')
-    <div class="flex bg-gray-50 dark:bg-gray-900">
+    <div class="flex bg-gray-50 dark:bg-gray-900 h-screen">
         
-        @yield('content')
+        <img src="https://loremflickr.com/cache/resized/65535_52279038739_b68757436d_b_900_300_nofilter.jpg" width="100%">
 
     </div>
     @include('footer')

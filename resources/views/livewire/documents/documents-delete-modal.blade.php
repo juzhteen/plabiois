@@ -8,7 +8,7 @@
             <div class="mt-4 mb-6">
                 <!-- Modal title -->
                 <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">
-                    Continue deleting resident {{ $position }}?
+                    Continue deleting document {{ $title }}?
                 </p>
                 <!-- Modal description -->
 

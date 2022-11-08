@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Form;
+use App\Models\Resident;
+use App\Models\EmployeeType;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,6 +32,24 @@ class DatabaseSeeder extends Seeder
                 "form_name" => $form
             ]);
         }
+
+        $positions = [
+            "Barangay Chairman",
+            "Barangay Kagawad",
+            "SK Chairman",
+            "Barangay Secretary",
+            "Barangay Treasurer"
+        ];
+
+        foreach ($positions as $position){
+            DB::table('employee_types')->insert([
+                "position" => $position
+            ]);
+        }
+
+        // Seeders
+
+        Resident::factory(15)->create();
         
     }
 }

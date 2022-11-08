@@ -43,6 +43,11 @@ return [
 
     'disks' => [
 
+        'documents' => [
+            'driver' => 'local',
+            'root' => storage_path('app/documents'),
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -80,6 +85,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('qrcodes') => storage_path('app/qrcodes'),
     ],
 
 ];

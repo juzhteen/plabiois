@@ -24,10 +24,34 @@ class AttendancePage extends Component
     public $employee;
     public $attendance_saved = false;
     public $attendance_type = 'time_in';
+    public $attendance_date;
+    public $year_query, $month_query, $day_query;
+
+    public function mount()
+    {
+      $this->attendance_date = Carbon::today();
+      
+      $this->day_query = Carbon::now()->day;
+      $this->month_query = Carbon::now()->month;
+      $this->year_query = Carbon::now()->year;
+    }
 
     public function render()
     {
-      $attendances = Attendance::whereDate("created_at", Carbon::today())->paginate(10);
+      $attendances = Attendance::join(
+          "employees",
+          "attendances.employee_employee_id",
+          "=",
+          "employees.employee_id"
+        )
+        ->whereDate("attendances.created_at", $this->attendance_date)->get();
+
+        if($this->attendance_date){
+          $this->year_query = explode("-", $this->attendance_date)[0];
+          $this->month_query = explode("-", $this->attendance_date)[1];
+          $this->day_query = explode("-", $this->attendance_date)[2];
+        }
+
       return view('livewire.attendance.attendance-page', ["attendances" => $attendances]);
     }
 
@@ -51,10 +75,18 @@ class AttendancePage extends Component
              // Check if date of latest record matches today's date
              if($latest_attendance_carbon->toDateString() == $currentDate){
               if($this->attendance_type == 'time_out'){
-                $latest_attendance->time_out = $currentDateTime;
-                $latest_attendance->save();
-                $this->dispatchBrowserEvent("attendance_out");
-                $this->attendance_saved = true;
+                // Check if timeout exists
+                $latest_attendance_out = Attendance::where('employee_employee_id', $employee->employee_id)->where('time_out', null)->whereDate('created_at', today())->first();
+                if(!$latest_attendance_out){
+                  $this->dispatchBrowserEvent("attendance_out_exists");
+                }else{
+                  $latest_attendance->time_out = $currentDateTime;
+                  $latest_attendance->save();
+                  $this->dispatchBrowserEvent("attendance_out");
+                  $this->attendance_saved = true;
+                }
+              }else{
+                $this->dispatchBrowserEvent("attendance_in_exists");
               }
             }else{
              $this->attendance_saved = true;
@@ -71,5 +103,10 @@ class AttendancePage extends Component
            $this->attendance_saved = true;
         }
       }
+    }
+
+    public function reset_date()
+    {
+      $this->attendance_date = Carbon::today();
     }
 }

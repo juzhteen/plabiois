@@ -18,7 +18,7 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Name
+                        Name @error('name')<span class="text-red-500"> | Invalid name </span> @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -27,7 +27,7 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Age
+                        Age @error('age')<span class="text-red-500"> | Invalid age </span> @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -36,7 +36,7 @@
 
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Gender
+                        Gender @error('gender')<span class="text-red-500"> | Invalid gender </span> @enderror
                     </span>
                     <select
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" wire:model="gender" id="sex" required>
@@ -49,7 +49,7 @@
 
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Civil status
+                        Civil status @error('civil_status')<span class="text-red-500"> | Invalid civil status </span> @enderror
                     </span>
                     <select
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" wire:model="civil_status" id="civil_status" required>
@@ -63,7 +63,7 @@
 
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Religion
+                        Religion @error('religion')<span class="text-red-500"> | Invalid religion </span> @enderror
                     </span>
                     <select
                         class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" wire:model="religion" id="religion" required>
@@ -83,7 +83,7 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Weight in KG
+                        Weight in KG @error('weight')<span class="text-red-500"> | Invalid weight </span> @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -92,7 +92,7 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Height in CM
+                        Height in CM @error('height')<span class="text-red-500"> | Invalid height </span> @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -101,16 +101,16 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Purok #
+                        Purok # (1-6) @error('purok') <span class="text-red-500">| Invalid purok #</span> @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        placeholder="Purok" type="number" wire:model="purok" id="purok" />
+                        placeholder="Purok" type="number" wire:model="purok" id="purok" min="1" max="6" />
                 </label>
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Email address
+                        Email address @error('email_address')<span class="text-red-500"> | Invalid email address </span> @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -119,7 +119,7 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Phone number
+                        Phone number @error('phone_number')<span class="text-red-500"> | Invalid phone number </span> @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"

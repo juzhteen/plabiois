@@ -1,4 +1,4 @@
-<div class="flex justify-between">
+<div class="flex justify-between shadow-xs p-3 rounded-lg mb-5">
   <div class="w-full flex justify-between align-center">
       <div class="flex">
           <div class="relative inset-y-0 flex items-center pl-2 mr-5">
@@ -21,12 +21,12 @@
                   </svg>
               </div>
               <input wire:model.debounce.2000ms="search"
-                  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-200 border-blue-500 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-blue-300 focus:outline-none focus:shadow-outline-blue form-input"
                   type="text" placeholder="Search" aria-label="Search" />
           </div>
       </div>
       <button wire:click.prevent="$toggle('openEdit')"
-          class=" mb-4 px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-full active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+          class="px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-full active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue shadow-2xl">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />

@@ -17,18 +17,16 @@
       <!-- Card -->
       <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"
-            ></path>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
+          </svg>          
         </div>
         <div>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            @if($residents->count() == 1)
+            @if($total_residents == 1)
               1 resident
             @else
-              {{ $residents->count() }} residents
+              {{ $total_residents }} residents
             @endif
           </p>
         </div>
@@ -49,11 +47,11 @@
     ]])
   
     <!-- New Table -->
-    <div class="w-full overflow-hidden rounded-lg shadow-xl">
+    <div class="w-full overflow-hidden rounded-lg shadow-md">
       <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
-            <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <tr class="bg-blue-100 text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700  dark:text-gray-40">
               <th class="px-4 py-2">
                 <span class="flex flex-col">
                     Name
@@ -111,7 +109,6 @@
               <th class="px-4 py-3">
                 <span class="flex flex-col">
                   Phone number
-                  <div class="flex flex-row">@include('livewire.includes.order-by', ["field" => 'phone_number'])</div>
                 </span>
               </th>
               <th class="px-4 py-3">Actions</th>
@@ -121,7 +118,7 @@
             @if ($residents->count())
               @foreach ($residents as $resident)
                 <tr class="text-gray-700 dark:text-gray-400">
-                  <td class="px-4 py-3 font-bold">
+                  <td class="px-4 py-3 font-bold text-sm">
                     {{ $resident->name }}
                   </td>
                   <td class="px-4 py-3 text-sm">
@@ -137,10 +134,10 @@
                     {{ $resident->religion }}
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $resident->weight }}
+                    {{ $resident->weight }} kg
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $resident->height }}
+                    {{ $resident->height }} cm
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $resident->purok }}
@@ -176,5 +173,7 @@
         </table>
       </div>
     </div>
+    <br>
+    {{ $residents->links() }}
   </div>
 </div>

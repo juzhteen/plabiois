@@ -30,18 +30,16 @@
       <!-- Card -->
       <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"
-            ></path>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
           </svg>
         </div>
         <div>
           <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-            @if($employees->count() == 1)
+            @if($total_employees == 1)
               1 employee
             @else
-              {{ $employees->count() }} employees
+              {{ $total_employees }} employees
             @endif
           </p>
         </div>
@@ -56,11 +54,11 @@
     ]])
   
     <!-- New Table -->
-    <div class="w-full overflow-hidden rounded-lg shadow-xl">
+    <div class="w-full overflow-hidden rounded-lg shadow-md">
       <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
           <thead>
-            <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+            <tr class="bg-blue-100 text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
               <th class="px-4 py-3">
                 <span class="flex flex-col">
                   Resident profile
@@ -93,18 +91,11 @@
             @if ($employees->count())
               @foreach ($employees as $employee)
                 <tr class="text-gray-700 dark:text-gray-400">
-                  <td class="px-4 py-3 font-bold">
+                  <td class="px-4 py-3 font-bold text-sm">
                     {{ $employee->resident->name }}
                   </td>
-                  <td class="px-4 py-3">
+                  <td class="px-4 py-3 text-sm">
                     {{ $employee->employee_code }}
-                    {!! QrCode::size(500)
-                      ->style('round')
-                      ->eye('circle')
-                      ->margin(5)
-                      ->errorCorrection('L')
-                      ->format("png")
-                      ->generate($employee->employee_code, "../public/qrcodes/". $employee->employee_code .".png") !!}
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $employee->employee_type->position }}
@@ -148,5 +139,7 @@
         </table>
       </div>
     </div>
+    <br>
+    {{ $employees->links() }}
   </div>
 </div>
