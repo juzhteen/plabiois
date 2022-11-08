@@ -4446,12 +4446,34 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 // Turbolinks.start();
 
 if (window.location.pathname == "/attendance") {
+  var setResult = function setResult(label, result) {
+    console.log(result.data);
+    label.style.fontWeight = "bold";
+    label.textContent = result.data;
+    label.style.color = "teal";
+    clearTimeout(label.highlightTimeout);
+    Livewire.emit("save_attendance", result.data);
+  };
+
+  // const qrScanner = new QrScanner(
+  //     document.querySelector(".attendance-qr-scanner"),
+  //     (result) => Livewire.emit("save_attendance", result.data),
+  //     {
+  //         highlightScanRegion: true,
+  //         highlightCodeOutline: true,
+  //     }
+  // );
+  var camQrResult = document.getElementById("cam-qr-result");
   var qrScanner = new qr_scanner__WEBPACK_IMPORTED_MODULE_1__["default"](document.querySelector(".attendance-qr-scanner"), function (result) {
-    return Livewire.emit("save_attendance", result.data);
+    return setResult(camQrResult, result);
   }, {
-    maxScansPerSecond: 1,
-    highlightScanRegion: true,
-    highlightCodeOutline: true
+    onDecodeError: function onDecodeError(error) {
+      camQrResult.textContent = error;
+      camQrResult.style.color = "inherit";
+    },
+    // highlightScanRegion: true,
+    // highlightCodeOutline: true,
+    maxScansPerSecond: 1
   });
   var qr_scanner_start = document.querySelector(".qr-scanner-start");
   var qr_scanner_stop = document.querySelector(".qr-scanner-stop");
@@ -4555,6 +4577,20 @@ window.addEventListener("attendance_out", function (event) {
     duration: 10000
   });
 });
+window.addEventListener("attendance_in_exists", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Time in log already exists!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("attendance_out_exists", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Time out log already exists!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
 window.addEventListener("barangay_certification_empty_fields", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
     text: "Please fill in all fields!",
@@ -4582,6 +4618,62 @@ window.addEventListener("request_completed", function (event) {
     pos: "top-right",
     duration: 10000
   });
+});
+window.addEventListener("error_saving", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "There's an error saving the record. Please review your data and try again.",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("existing_document", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Document with this title or file name already exists!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("document_saved", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Document record saved successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("document_deleted", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Document record deleted successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+var download = document.getElementById("download_qr");
+var qrcodeContainer = document.getElementById("qrcode");
+var empCodeContainer = document.querySelector(".emp_code");
+window.addEventListener("generate_qrcode", function (event) {
+  var emp_code = event.detail.emp_code;
+
+  if (emp_code) {
+    qrcodeContainer.innerHTML = "";
+    empCodeContainer.innerHTML = emp_code;
+    new QRious({
+      element: qrcodeContainer,
+      value: emp_code,
+      size: 150,
+      padding: 10,
+      level: 'H'
+    });
+  } else {
+    alert("Error loading qrcode");
+  }
+}); // Download QR
+
+download.addEventListener("click", function (e) {
+  var link = document.createElement("a");
+  link.download = empCodeContainer.innerHTML + ".png";
+  link.href = qrcodeContainer.toDataURL();
+  link.click();
+  link["delete"];
 });
 
 /***/ }),

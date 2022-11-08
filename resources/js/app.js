@@ -9,13 +9,37 @@ import "turbolinks";
 // Turbolinks.start();
 
 if (window.location.pathname == "/attendance") {
+    // const qrScanner = new QrScanner(
+    //     document.querySelector(".attendance-qr-scanner"),
+    //     (result) => Livewire.emit("save_attendance", result.data),
+    //     {
+    //         highlightScanRegion: true,
+    //         highlightCodeOutline: true,
+    //     }
+    // );
+
+    const camQrResult = document.getElementById("cam-qr-result");
+
+    function setResult(label, result) {
+        console.log(result.data);
+        label.style.fontWeight = "bold";
+        label.textContent = result.data;
+        label.style.color = "teal";
+        clearTimeout(label.highlightTimeout);
+        Livewire.emit("save_attendance", result.data);
+    }
+
     const qrScanner = new QrScanner(
         document.querySelector(".attendance-qr-scanner"),
-        (result) => Livewire.emit("save_attendance", result.data),
+        (result) => setResult(camQrResult, result),
         {
-            maxScansPerSecond: 1,
-            highlightScanRegion: true,
-            highlightCodeOutline: true,
+            onDecodeError: (error) => {
+                camQrResult.textContent = error;
+                camQrResult.style.color = "inherit";
+            },
+            // highlightScanRegion: true,
+            // highlightCodeOutline: true,
+            maxScansPerSecond: 1
         }
     );
 
@@ -138,6 +162,22 @@ window.addEventListener("attendance_out", (event) => {
     });
 });
 
+window.addEventListener("attendance_in_exists", (event) => {
+    Snackbar.show({
+        text: "Time in log already exists!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("attendance_out_exists", (event) => {
+    Snackbar.show({
+        text: "Time out log already exists!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
 window.addEventListener("barangay_certification_empty_fields", (event) => {
     Snackbar.show({
         text: "Please fill in all fields!",
@@ -168,4 +208,68 @@ window.addEventListener("request_completed", (event) => {
         pos: "top-right",
         duration: 10000,
     });
+});
+
+window.addEventListener("error_saving", (event) => {
+    Snackbar.show({
+        text: "There's an error saving the record. Please review your data and try again.",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("existing_document", (event) => {
+    Snackbar.show({
+        text: "Document with this title or file name already exists!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("document_saved", (event) => {
+    Snackbar.show({
+        text: "Document record saved successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("document_deleted", (event) => {
+    Snackbar.show({
+        text: "Document record deleted successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+let download = document.getElementById("download_qr");
+let qrcodeContainer = document.getElementById("qrcode");
+let empCodeContainer = document.querySelector(".emp_code");
+
+window.addEventListener("generate_qrcode", (event) => {
+    let emp_code = event.detail.emp_code;
+
+    if (emp_code) {
+        qrcodeContainer.innerHTML = "";
+        empCodeContainer.innerHTML = emp_code;
+        new QRious({
+            element: qrcodeContainer,
+            value: emp_code,
+            size: 150,
+            padding: 10,
+            level: 'H'
+        });
+    } else {
+        alert("Error loading qrcode");
+    }
+});
+
+ // Download QR
+
+ download.addEventListener("click", function (e) {
+    let link = document.createElement("a");
+    link.download = empCodeContainer.innerHTML + ".png";
+    link.href = qrcodeContainer.toDataURL();
+    link.click();
+    link.delete;
 });

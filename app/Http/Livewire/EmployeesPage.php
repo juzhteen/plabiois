@@ -86,7 +86,9 @@ class EmployeesPage extends Component
                 ->orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10);
 
-        return view('livewire.employees.employees-page', ["employees" => $employees]);
+        $total_employees = Employee::all()->count();
+
+        return view('livewire.employees.employees-page', ["employees" => $employees, "total_employees" => $total_employees]);
     }
 
     public function updatedResidentQuery()
@@ -241,8 +243,8 @@ class EmployeesPage extends Component
     {
         $employee = Employee::findOrFail($employee_id);
         $this->emp_code = $employee->employee_code;
+        $this->dispatchBrowserEvent("generate_qrcode", ['emp_code' => $this->emp_code]);
         $this->openQr = true;
-
     }
 
     public function closeQrModal()

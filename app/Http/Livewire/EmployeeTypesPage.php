@@ -38,7 +38,9 @@ class EmployeeTypesPage extends Component
             : EmployeeType::orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10);
 
-        return view('livewire.employee-types.employee-types-page', ["employee_types" => $employee_types]);
+        $total_positions = EmployeeType::all()->count();
+
+        return view('livewire.employee-types.employee-types-page', ["employee_types" => $employee_types, "total_positions" => $total_positions]);
     }
 
     public function toggleEdit()

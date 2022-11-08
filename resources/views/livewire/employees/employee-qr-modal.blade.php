@@ -8,29 +8,25 @@
             <div class="mt-4 mb-6">
                 <!-- Modal title -->
                 <p class="mb-2 text-lg font-semibold text-gray-700 dark:text-gray-300">
-                    Download or send QR
+                    Download QR
                 </p>
 
-                <div class="visible-print text-center border-2 border-gray-300 flex justify-center">
-                    <img src="data:image/png;base64,
-                        {{ base64_encode(
-                            QrCode::size(200)
-                                ->style('round')
-                                ->eye('circle')
-                                ->margin(5)
-                                ->errorCorrection('L')
-                                ->format("png")
-                                ->generate(". $emp_code ."))
-                        }}
-                    ">
-               </div>   
-              
+                <div class="visible-print text-center border-2 border-gray-300 flex justify-center p-10">
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+                    <span class="emp_code hidden"></span>
+                    <canvas id="qrcode" class="qrcode"></canvas>
+
+                </div>
+
             </div>
             <footer
                 class="flex flex-col items-center justify-end px-5 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800">
-                <a href="{{ asset('qrcodes/'. $emp_code .'.png') }}" class="w-full px-5 py-3 text-sm font-medium leading-5 text-white sm:px-4 sm:py-2 sm:w-auto transition-colors duration-150 bg-green-400 border border-transparent rounded-md active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green" download>
+                <button type="button"
+                    class="w-full px-5 py-3 text-sm font-medium leading-5 text-white sm:px-4 sm:py-2 sm:w-auto transition-colors duration-150 bg-green-400 border border-transparent rounded-md active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green"
+                    id="download_qr">
                     Download QR
-                </a>
+                </button>
                 <button wire:click.prevent="closeQrModal()"
                     class="w-full px-5 py-3 text-sm font-medium leading-5 text-white text-gray-700 transition-colors duration-150 border border-gray-300 rounded-lg dark:text-gray-400 sm:px-4 sm:py-2 sm:w-auto active:bg-transparent hover:border-gray-500 focus:border-gray-500 active:text-gray-500 focus:outline-none focus:shadow-outline-gray">
                     Close

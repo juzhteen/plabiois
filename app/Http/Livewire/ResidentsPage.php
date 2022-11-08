@@ -21,15 +21,15 @@ class ResidentsPage extends Component
 
     protected $rules = [
         'name' => 'required',
-        'age' => 'required',
+        'age' => 'required|integer',
         'gender' => 'required',
         'civil_status' => 'required',
         'religion' => 'required',
-        'weight' => 'required',
-        'height' => 'required',
-        'purok' => 'required',
-        'email_address' => 'required',
-        'phone_number' => 'required'
+        'weight' => 'required|integer',
+        'height' => 'required|integer',
+        'purok' => 'required|integer|min:1|max:6',
+        'email_address' => 'email',
+        'phone_number' => 'min:11|max:11'
     ];
 
     public function mount()
@@ -55,7 +55,9 @@ class ResidentsPage extends Component
             : Resident::orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10);
 
-        return view('livewire.residents.residents-page', ["residents" => $residents]);
+        $total_residents = Resident::all()->count();
+
+        return view('livewire.residents.residents-page', ["residents" => $residents, "total_residents" => $total_residents]);
     }
 
     public function toggleEdit()
@@ -154,6 +156,7 @@ class ResidentsPage extends Component
         $this->purok = "";
         $this->email_address = "";
         $this->phone_number = "";
+        $this->resetValidation();
     }
 
     public function orderby($orderBy, $orderByOrder)
