@@ -162,6 +162,8 @@ window.addEventListener("attendance_out", (event) => {
         pos: "top-right",
         duration: 10000,
     });
+    const notif_sound = document.getElementById('attendance-notification-sound');
+    notif_sound.play();
 });
 
 window.addEventListener("attendance_in_exists", (event) => {
@@ -255,6 +257,14 @@ window.addEventListener("user_deleted", (event) => {
 window.addEventListener("user_approved", (event) => {
     Snackbar.show({
         text: "User account approved successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("employee_type_exists", (event) => {
+    Snackbar.show({
+        text: "Position or employee type already exists!",
         pos: "top-right",
         duration: 10000,
     });

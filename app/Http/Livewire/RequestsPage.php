@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 
 use App\Models\Request;
+use Carbon\Carbon;
 
 class RequestsPage extends Component
 {
@@ -15,10 +16,12 @@ class RequestsPage extends Component
     public $orderByOrder = "asc";
     public $search = "";
     public $searchBy;
+    public $request_date;
 
     public function mount()
     {
         $this->searchBy = "all";
+        $this->request_date = Carbon::today();
     }
 
     public function render()
@@ -41,6 +44,7 @@ class RequestsPage extends Component
                     "forms.form_id"
                 )
                 ->orderBy($this->orderBy, $this->orderByOrder)
+                ->whereDate("request_date", $this->request_date)
                 ->paginate(10)
             : Request::join(
                 "residents",
@@ -54,6 +58,7 @@ class RequestsPage extends Component
                     "=",
                     "forms.form_id"
                 )
+                ->whereDate("request_date", $this->request_date)
                 ->orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10);
 
@@ -148,6 +153,11 @@ class RequestsPage extends Component
     {
         $this->orderBy = $orderBy;
         $this->orderByOrder = $orderByOrder;
+    }
+
+    public function reset_date()
+    {
+      $this->request_date = Carbon::today();
     }
 
 }

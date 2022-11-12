@@ -25,10 +25,22 @@
 
     @include('livewire.includes.search', ["fields" => [
         "residents.name" => "Name",
-        "forms.form_name" => "Form",
-        "request_date" => "Request date",
-        "expiration_date" => "Expiration date"
+        "forms.form_name" => "Form"
     ]])
+
+<div class="flex justify-between shadow-xs p-3 rounded-lg mb-5 mt-10">
+    <div class="w-full flex justify-between align-center">
+        <div class="flex">
+            <div class="w-96 relative inset-y-0 flex items-center pl-2 mr-5">
+                <label class="dark:text-white mr-5 w-40">Select date</label>
+                <input wire:model.debounce.2000ms="request_date"
+                class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-200 border-blue-500 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-blue-300 focus:outline-none focus:shadow-outline-blue form-input"
+                type="date" aria-label="Select date" />
+                <a wire:click="reset_date" class="cursor-pointer ml-5">Clear</a>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- New Table -->
     <div class="w-full overflow-hidden rounded-lg shadow-xl">

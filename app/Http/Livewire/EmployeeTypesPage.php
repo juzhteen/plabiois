@@ -40,6 +40,8 @@ class EmployeeTypesPage extends Component
 
         $total_positions = EmployeeType::all()->count();
 
+        // dd($employee_types);
+
         return view('livewire.employee-types.employee-types-page', ["employee_types" => $employee_types, "total_positions" => $total_positions]);
     }
 
@@ -65,14 +67,22 @@ class EmployeeTypesPage extends Component
     public function store()
     {
         $this->validate();
-        EmployeeType::updateOrCreate(
-            ["employee_type_id" => $this->employee_type_id],
-            [
-              "position" => $this->position,
-            ]
-        );
-        $this->employee_type_id ? $this->dispatchBrowserEvent("employee_type_updated") : $this->dispatchBrowserEvent("employee_type_added");
-        $this->openEdit = false;
+
+        // Check if position already exists
+        $pos = EmployeeType::where('position', '=', $this->position)->first();
+
+        if($pos){
+            $this->dispatchBrowserEvent("employee_type_exists");
+        }else{
+            EmployeeType::updateOrCreate(
+                ["employee_type_id" => $this->employee_type_id],
+                [
+                  "position" => $this->position,
+                ]
+            );
+            $this->employee_type_id ? $this->dispatchBrowserEvent("employee_type_updated") : $this->dispatchBrowserEvent("employee_type_added");
+            $this->openEdit = false;
+        }
     }
 
     //====================DELETE=================================
