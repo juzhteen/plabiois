@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\Form;
 use App\Models\Resident;
 use App\Models\EmployeeType;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +36,8 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        // Insert positions
+
         $positions = [
             "Barangay Chairman",
             "Barangay Kagawad",
@@ -47,9 +52,22 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        // Insert superadmin
+
+        // Add superadmin
+
+        DB::table("users")->insert([
+            "name" => "Super Admin",
+            "admin_type" => "superadmin",
+            "email" => "superadmin@gmail.com",
+            "password" => Hash::make("superadmin123"),
+            "admin_type" => "superadmin",
+            "approved" => true
+        ]);
+
         // Seeders
 
-        Resident::factory(15)->create();
+        //Resident::factory(15)->create();
         
     }
 }

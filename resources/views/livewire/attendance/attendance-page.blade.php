@@ -131,4 +131,8 @@
     </div>
     <br>
     {{-- {{ $attendances->links() }} --}}
+    <audio id="attendance-notification-sound">
+        <source src="{{ asset('mp3/attendance-notification-sound.mp3') }}" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
 </div>

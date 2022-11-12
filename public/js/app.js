@@ -4569,6 +4569,8 @@ window.addEventListener("attendance_in", function (event) {
     pos: "top-right",
     duration: 10000
   });
+  var notif_sound = document.getElementById('attendance-notification-sound');
+  notif_sound.play();
 });
 window.addEventListener("attendance_out", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
@@ -4643,6 +4645,20 @@ window.addEventListener("document_saved", function (event) {
 window.addEventListener("document_deleted", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
     text: "Document record deleted successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("user_deleted", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "User account deleted successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("user_approved", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "User account approved successfully!",
     pos: "top-right",
     duration: 10000
   });
