@@ -24,6 +24,14 @@
                             {{ session('status') }}
                         </div>
                         @endif
+
+                        @if (session('error'))
+                            <div class="alert alert-danger text-red-500 mb-2">
+                                {{ session('error') }}
+                            </div>
+                        @endif
+                        <br>
+
                         <form method="POST" action="{{ route('login') }}">
                             @csrf
                             <label class="block text-sm">

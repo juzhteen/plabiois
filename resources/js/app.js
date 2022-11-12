@@ -152,6 +152,8 @@ window.addEventListener("attendance_in", (event) => {
         pos: "top-right",
         duration: 10000,
     });
+    const notif_sound = document.getElementById('attendance-notification-sound');
+    notif_sound.play();
 });
 
 window.addEventListener("attendance_out", (event) => {
@@ -237,6 +239,22 @@ window.addEventListener("document_saved", (event) => {
 window.addEventListener("document_deleted", (event) => {
     Snackbar.show({
         text: "Document record deleted successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("user_deleted", (event) => {
+    Snackbar.show({
+        text: "User account deleted successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("user_approved", (event) => {
+    Snackbar.show({
+        text: "User account approved successfully!",
         pos: "top-right",
         duration: 10000,
     });

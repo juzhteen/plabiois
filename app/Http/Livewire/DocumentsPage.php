@@ -56,7 +56,7 @@ class DocumentsPage extends Component
             $page = new Document();
             $page->title = $this->title;
             $page->description = $this->description;
-            $page->file = $this->file->getClientOriginalName();
+            $page->file_name = $this->file->getClientOriginalName();
             $page->uploaded_by = Auth::user()->id;
 
             //Store file to file folder in storage

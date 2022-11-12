@@ -40,6 +40,8 @@ class AttendanceDtrController extends Controller
         ->whereDay('attendances.created_at', '=', $day)
         ->get();
 
+        // dd($employee_dtr_records);
+
         return view('livewire.attendance.daily-attendance-preview', [
           'employee_dtr_records' => $employee_dtr_records,
           'month' => $month,

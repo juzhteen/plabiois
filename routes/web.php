@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 
-Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+Route::group(['middleware' => ['auth:sanctum', 'verified', 'approved']], function () {
     Route::get('dashboard', function(){
         return redirect('/residents');
     }
@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::view('attendance/dtr', 'attendance-dtr')->name('attendance-dtr');
     Route::view('requests', 'requests')->name('requests');
     Route::view('documents', 'documents')->name('documents');
+    Route::view('users', 'users')->name('users');
     // Display form to be printed
     Route::get('requests/{request_id}/preview', [GenerateFormController::class, 'index']);
     Route::get('attendance/dtr/{employee_id}/{year}/{month}/print', [AttendanceDtrController::class, 'index'])->name('attendance-dtr-print');
