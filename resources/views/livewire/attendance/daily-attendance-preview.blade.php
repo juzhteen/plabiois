@@ -54,7 +54,8 @@
             </div>
             <div class="mt-14">
                 <h3 class="mb-8 text-center font-bold text-lg">Attendance for
-                    {{ \Carbon\Carbon::createFromDate($year, $month, $day)->format('F d, Y') }}</h3>
+                    {{ \Carbon\Carbon::createFromDate((int)$year, (int)$month, (int)$day)->format('F d, Y') }}
+                </h3>
                 <table class="w-full whitespace-no-wrap">
                     <thead>
                         <tr
