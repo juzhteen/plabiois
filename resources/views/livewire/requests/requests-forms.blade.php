@@ -55,7 +55,7 @@
                               <input type="text" id="purpose" wire:model="purpose"
                                   class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" placeholder="Purpose">
                           </div>
-                          <button wire:click.prevent="send_request" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Submit</button>
+                          <button wire:click.prevent="send_request" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg font-bold">Submit</button>
                     </div>
                 </div>
                 @endif
@@ -89,7 +89,7 @@
                           <input type="text" id="purpose" wire:model="purpose"
                               class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                       </div>
-                      <button wire:click.prevent="send_request" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Submit</button>
+                      <button wire:click.prevent="send_request" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg font-bold">Submit</button>
                        
                     </div>
                 </div>
@@ -129,7 +129,7 @@
                                 <input type="number" id="income" wire:model="income"
                                     class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
-                            <button wire:click.prevent="send_request" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Submit</button>
+                            <button wire:click.prevent="send_request" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg font-bold">Submit</button>
                         </div>
                     </div>
                 @endif
@@ -170,7 +170,7 @@
                               <input type="date" id="invitation-date" wire:model="invitation_date"
                                   class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                           </div>
-                          <button wire:click.prevent="send_request" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Submit</button>
+                          <button wire:click.prevent="send_request" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg font-bold">Submit</button>
                         </div>
                     </div>
                 @endif
@@ -199,7 +199,17 @@
                                 <input type="date" id="date-of-birth" wire:model="date_of_birth"
                                     class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                             </div>
-                            <button wire:click.prevent="send_request" class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg font-bold">Submit</button>
+                            <div class="relative mb-4">
+                                <label for="date-of-birth" class="leading-7 text-sm text-gray-600">Purpose</label>
+                                <select id="date-of-birth" wire:model="purpose"
+                                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                                    <option value="">Please select purpose</option>
+                                    <option value="For Financial Assistance">For Financial Assistance</option>
+                                    <option value="For Drug Assistance given from MSSD BARMM">For Drug Assistance given from MSSD BARMM</option>
+                                    <option value="For Legal Purposes">For Legal Purposes</option>
+                                </select>
+                            </div>
+                            <button wire:click.prevent="send_request" class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg font-bold">Submit</button>
                         </div>
                     </div>
                 @endif

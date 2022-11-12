@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder
             "Barangay Chairman",
             "Barangay Kagawad",
             "SK Chairman",
+            "SK Kagawad",
             "Barangay Secretary",
             "Barangay Treasurer"
         ];

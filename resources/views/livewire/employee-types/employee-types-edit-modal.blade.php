@@ -7,7 +7,13 @@
         <form>
             <div class="mt-4 mb-6">
               <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                Modals
+                @php
+                    if($employee_type_id){
+                        echo "EDIT POSITION";
+                    }else{
+                        echo "ADD POSITION";
+                    }
+                @endphp
               </h2>
 
               <label class="block text-sm mt-4">

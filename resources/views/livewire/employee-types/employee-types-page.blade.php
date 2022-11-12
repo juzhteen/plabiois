@@ -49,6 +49,7 @@
                   <div class="flex flex-row">@include('livewire.includes.order-by', ["field" => 'position'])</div>
                 </span>
               </th>
+              <th class="px-4 py-3">Employees</th>
               <th class="px-4 py-3">Actions</th>
             </tr>
           </thead>
@@ -58,6 +59,13 @@
                 <tr class="text-gray-700 dark:text-gray-400">
                   <td class="px-4 py-3 text-sm">
                     {{ $type->position }}
+                  </td>
+                  <td class="px-4 py-3 text-sm flex flex-col">
+                    @if($type->employees->count())
+                      @foreach($type->employees as $employee)
+                      <span class="py-2 px-5 rounded-full text-md text-black bg-gray-100 hover:bg-gray-200 hover:drop-shadow-md duration-300 mb-2 w-max-content">{{ $employee->resident->name }}</span>
+                      @endforeach
+                    @endif
                   </td>
                   <td class="px-4 py-2">
                     <button wire:click.prevent="edit({{ $type->employee_type_id }})"

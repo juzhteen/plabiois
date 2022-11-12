@@ -4578,6 +4578,8 @@ window.addEventListener("attendance_out", function (event) {
     pos: "top-right",
     duration: 10000
   });
+  var notif_sound = document.getElementById('attendance-notification-sound');
+  notif_sound.play();
 });
 window.addEventListener("attendance_in_exists", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
@@ -4659,6 +4661,13 @@ window.addEventListener("user_deleted", function (event) {
 window.addEventListener("user_approved", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
     text: "User account approved successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("employee_type_exists", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Position or employee type already exists!",
     pos: "top-right",
     duration: 10000
   });
