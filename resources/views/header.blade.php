@@ -2,18 +2,27 @@
     <div class="max-w-7xl mx-auto px-4">
         <div class="flex justify-between">
 
-            <div class="flex space-x-4">
+            <div class="flex space-x-4 justify-between w-full">
                 <div>
-                    <a href="#" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
+                    <a href="/" class="flex items-center py-5 px-2 text-gray-700 hover:text-gray-900">
                         <img src="{{ asset('img/plabio-logo.png') }}" alt="PLabio logo" width="40px">
-                        <span class="font-bold ml-4">Paulina Labio</span>
+                        <span class="font-bold ml-4">Paulino Labio</span>
                     </a>
                 </div>
 
-                <div class="hidden sm:flex md:flex items-center space-x-1">
-                    <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Features</a>
-                    <a href="#" class="py-5 px-3 text-gray-700 hover:text-gray-900">Pricing</a>
+                <div class="desktop-links md:flex items-center">
+                    <a href="/" class="py-5 px-3 text-gray-700 hover:text-gray-900">Home</a>
+                    <a href="/requests/forms" class="py-5 px-3 text-gray-700 hover:text-gray-900">Request document</a>
                 </div>
+
+                <style>
+                    @media screen and (max-width: 767px){
+                        .desktop-links {
+                            display: none;
+                        }
+                    }
+                </style>
+
             </div>
 
     
@@ -31,8 +40,8 @@
     </div>
 
     <div class="mobile-menu hidden md:hidden">
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Features</a>
-        <a href="#" class="block py-2 px-4 text-sm hover:bg-gray-200">Pricing</a>
+        <a href="/" class="block py-2 px-4 text-sm hover:bg-gray-200">Home</a>
+        <a href="/requests/forms" class="block py-2 px-4 text-sm hover:bg-gray-200">Request document</a>
     </div>
 </nav>
 

@@ -82,7 +82,7 @@
 
     </div>
 </div>
-
+<br>
 <div class="flex justify-between items-center">
     <div class="flex flex-col justify-center items-center">
         <p class="text-right mt-8 underline uppercase">
