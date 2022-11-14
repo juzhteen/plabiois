@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Models\User;
+
 class CreateDocumentsTable extends Migration
 {
     /**
@@ -18,7 +20,7 @@ class CreateDocumentsTable extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('file_name');
-            $table->foreignId('uploaded_by')->references('id')->on('users');
+            $table->foreignIdFor(User::class);
             $table->timestamps();
         });
     }

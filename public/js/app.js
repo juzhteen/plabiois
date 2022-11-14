@@ -4597,8 +4597,8 @@ window.addEventListener("attendance_out_exists", function (event) {
 });
 window.addEventListener("barangay_certification_empty_fields", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
-    text: "Please fill in all fields!",
-    pos: "bottom-right",
+    text: "Field or fields are empty or Resident profile not found.",
+    pos: "top-right",
     duration: 10000
   });
 });

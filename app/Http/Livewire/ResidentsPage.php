@@ -27,9 +27,7 @@ class ResidentsPage extends Component
         'religion' => 'required',
         'weight' => 'required|integer',
         'height' => 'required|integer',
-        'purok' => 'required|integer|min:1|max:6',
-        'email_address' => 'email',
-        'phone_number' => 'min:11|max:11'
+        'purok' => 'required|integer|min:1|max:6'
     ];
 
     public function mount()

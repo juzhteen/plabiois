@@ -4,15 +4,17 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\WithPagination;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-use App\ModelS\Document;
+use App\Models\Document;
 
 class DocumentsPage extends Component
 {
     use WithFileUploads;
+    use WithPagination;
 
     public $document_id, $title, $description, $file, $file_update, $title_update;
     public $total_documents;
@@ -33,7 +35,7 @@ class DocumentsPage extends Component
 
     public function render()
     {
-        $documents = Document::paginate();
+        $documents = Document::paginate(10);
         $this->total_documents = Document::all()->count();
 
         return view('livewire.documents.documents-page', ['documents' => $documents]);

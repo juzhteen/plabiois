@@ -12,7 +12,7 @@
 
                 <div class="desktop-links md:flex items-center">
                     <a href="/" class="py-5 px-3 text-gray-700 hover:text-gray-900">Home</a>
-                    <a href="/requests/forms" class="py-5 px-3 text-gray-700 hover:text-gray-900">Request document</a>
+                    <a href="{{ route('login') }}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Login</a>
                 </div>
 
                 <style>
