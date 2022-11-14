@@ -184,8 +184,8 @@ window.addEventListener("attendance_out_exists", (event) => {
 
 window.addEventListener("barangay_certification_empty_fields", (event) => {
     Snackbar.show({
-        text: "Please fill in all fields!",
-        pos: "bottom-right",
+        text: "Field or fields are empty or Resident profile not found.",
+        pos: "top-right",
         duration: 10000,
     });
 });

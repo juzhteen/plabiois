@@ -7,7 +7,9 @@
                 $bc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
                     ->where('employee_types.position', 'Barangay Chairman')
                     ->first();
-                echo $bc->resident->name;
+                if($bc){
+                    echo $bc->resident->name;
+                }
             @endphp
         </b>
         Barangay Chairman
@@ -20,9 +22,11 @@
                 ->get();
         @endphp
 
-        @foreach ($bks as $bk)
-            <span>{{ $bk->resident->name }}</span>
-        @endforeach
+        @if($bks)
+            @foreach ($bks as $bk)
+                <span>{{ $bk->resident->name }}</span>
+            @endforeach
+        @endif
 
         <b>
             @php

@@ -14,8 +14,8 @@ class AddEmailAddressToResidentsTable extends Migration
     public function up()
     {
         Schema::table('residents', function (Blueprint $table) {
-            $table->string("email_address");
-            $table->string("phone_number");
+            $table->string("email_address")->nullable();
+            $table->string("phone_number")->nullable();
         });
     }
 
