@@ -1,4 +1,4 @@
-<h1 class="text-center font-bold mt-10 text-xl mb-10">____ INVITATION</h1>
+<h1 class="text-center font-bold mt-10 text-xl mb-10">CASE INVITATION</h1>
 <p class="text-right">{{ now()->format('F') }} {{ now()->day }}, {{ now()->year }}</p>
 <p class="mb-4">
     <span class="underline">
