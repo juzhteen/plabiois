@@ -41,7 +41,7 @@
 
     <div class="mobile-menu hidden md:hidden">
         <a href="/" class="block py-2 px-4 text-sm hover:bg-gray-200">Home</a>
-        <a href="/requests/forms" class="block py-2 px-4 text-sm hover:bg-gray-200">Request document</a>
+        <a href="/login" class="block py-2 px-4 text-sm hover:bg-gray-200">Login</a>
     </div>
 </nav>
 
