@@ -140,7 +140,7 @@
                     {{ $resident->height }} cm
                   </td>
                   <td class="px-4 py-3 text-sm">
-                    {{ $resident->purok }}
+                    Purok {{ $resident->purok }}
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $resident->email_address }}

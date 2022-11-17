@@ -12,7 +12,7 @@
 
                 <div class="desktop-links md:flex items-center">
                     <a href="/" class="py-5 px-3 text-gray-700 hover:text-gray-900">Home</a>
-                    <a href="{{ route('login') }}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Login</a>
+                    <a href="{{ route('login') }}" class="py-5 px-3 text-gray-700 hover:text-gray-900">Employee login</a>
                 </div>
 
                 <style>
@@ -41,7 +41,7 @@
 
     <div class="mobile-menu hidden md:hidden">
         <a href="/" class="block py-2 px-4 text-sm hover:bg-gray-200">Home</a>
-        <a href="/login" class="block py-2 px-4 text-sm hover:bg-gray-200">Login</a>
+        <a href="/login" class="block py-2 px-4 text-sm hover:bg-gray-200">Employee login</a>
     </div>
 </nav>
 
