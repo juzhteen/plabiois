@@ -92,13 +92,19 @@ class AttendancePage extends Component
              $this->attendance_saved = true;
             }
         }else{
-          Attendance::updateOrCreate(
-            ["attendance_id" => $this->attendance_id],
-            [
-                "employee_employee_id" => $employee->employee_id,
-                "time_in" => $currentDateTime
-            ]
-          );
+          // Attendance::updateOrCreate(
+          //   ["attendance_id" => $this->attendance_id],
+          //   [
+          //       "employee_employee_id" => $employee->employee_id,
+          //       "time_in" => $currentDateTime
+          //   ]
+          // );
+
+          $attendance_in = new Attendance;
+          $attendance_in->employee_employee_id = $employee->employee_id;
+          $attendance_in->time_in = $currentDateTime;
+          $attendance_in->save();
+
           $this->dispatchBrowserEvent("attendance_in");
            $this->attendance_saved = true;
         }
