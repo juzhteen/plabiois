@@ -8,26 +8,30 @@
             <div class="mt-4 mb-6">
                 <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
                     @php
-                        if($resident_id){
-                        echo "EDIT RESIDENT RECORD";
-                        }else{
-                        echo "ADD RESIDENT RECORD";
+                        if ($resident_id) {
+                            echo 'EDIT RESIDENT RECORD';
+                        } else {
+                            echo 'ADD RESIDENT RECORD';
                         }
                     @endphp
                 </h2>
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Name @error('name')<span class="text-red-500"> | Invalid name </span> @enderror
+                        Name @error('name')
+                            <span class="text-red-500"> | Invalid name </span>
+                        @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        placeholder="Name" type="text" wire:model="name" id="name" required/>
+                        placeholder="Name" type="text" wire:model="name" id="name" required />
                 </label>
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Age @error('age')<span class="text-red-500"> | Invalid age </span> @enderror
+                        Age @error('age')
+                            <span class="text-red-500"> | Invalid age </span>
+                        @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -36,10 +40,13 @@
 
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Gender @error('gender')<span class="text-red-500"> | Invalid gender </span> @enderror
+                        Gender @error('gender')
+                            <span class="text-red-500"> | Invalid gender </span>
+                        @enderror
                     </span>
                     <select
-                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" wire:model="gender" id="sex" required>
+                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                        wire:model="gender" id="sex" required>
                         <option value="">Please select gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -49,10 +56,13 @@
 
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Civil status @error('civil_status')<span class="text-red-500"> | Invalid civil status </span> @enderror
+                        Civil status @error('civil_status')
+                            <span class="text-red-500"> | Invalid civil status </span>
+                        @enderror
                     </span>
                     <select
-                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" wire:model="civil_status" id="civil_status" required>
+                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                        wire:model="civil_status" id="civil_status" required>
                         <option value="">Please select civil status</option>
                         <option value="Single">Single</option>
                         <option value="Married">Married</option>
@@ -63,27 +73,20 @@
 
                 <label class="block mt-4 text-sm">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Religion @error('religion')<span class="text-red-500"> | Invalid religion </span> @enderror
+                        Religion @error('religion')
+                            <span class="text-red-500"> | Invalid religion </span>
+                        @enderror
                     </span>
-                    <select
-                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" wire:model="religion" id="religion" required>
-                        <option value="">Please select religion</option>
-                        <option value="Roman Catholic">Roman Catholic</option>
-                        <option value="Islam">Islam</option>
-                        <option value="Evangelicals (PCEC)">Evangelicals (PCEC)</option>
-                        <option value="Iglesia ni Cristo">Iglesia ni Cristo</option>
-                        <option value="Non-Roman Catholic and Protestant (NCCP)">Non-Roman Catholic and Protestant (NCCP)</option>
-                        <option value="Aglipayan">Aglipayan</option>
-                        <option value="Seventh-day Adventist">Seventh-day Adventist</option>
-                        <option value="Bible Baptist Church">Bible Baptist Church</option>
-                        <option value="United Church of Christ in the Philippines">United Church of Christ in the Philippines</option>
-                        <option value="Jehovah's Witnesses">Jehovah's Witnesses</option>
-                    </select>
+                    <input
+                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                        placeholder="Religion" type="text" wire:model="religion" id="religion" />
                 </label>
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Weight in KG @error('weight')<span class="text-red-500"> | Invalid weight </span> @enderror
+                        Weight in KG @error('weight')
+                            <span class="text-red-500"> | Invalid weight </span>
+                        @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -92,7 +95,9 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Height in CM @error('height')<span class="text-red-500"> | Invalid height </span> @enderror
+                        Height in CM @error('height')
+                            <span class="text-red-500"> | Invalid height </span>
+                        @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -101,16 +106,29 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Purok # (1-6) @error('purok') <span class="text-red-500">| Invalid purok #</span> @enderror
+                        Purok @error('purok')
+                            <span class="text-red-500">| Invalid purok #</span>
+                        @enderror
                     </span>
-                    <input
-                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        placeholder="Purok" type="number" wire:model="purok" id="purok" min="1" max="6" />
+                    <select
+                        class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                        wire:model="purok" id="purok" required>
+                        <option value="">Please select purok</option>
+                        <option value="1">Purok 1</option>
+                        <option value="2">Purok 2</option>
+                        <option value="3">Purok 3</option>
+                        <option value="4">Purok 4</option>
+                        <option value="5">Purok 5</option>
+                        <option value="6">Purok 6</option>
+                        <option value="7">Purok 7</option>
+                    </select>
                 </label>
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Email address @error('email_address')<span class="text-red-500"> | Invalid email address </span> @enderror
+                        Email address @error('email_address')
+                            <span class="text-red-500"> | Invalid email address </span>
+                        @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
@@ -119,7 +137,9 @@
 
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">
-                        Phone number @error('phone_number')<span class="text-red-500"> | Invalid phone number </span> @enderror
+                        Phone number @error('phone_number')
+                            <span class="text-red-500"> | Invalid phone number </span>
+                        @enderror
                     </span>
                     <input
                         class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
