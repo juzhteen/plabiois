@@ -167,6 +167,6 @@
         </div>
     </div>
     <br>
-
+    {{ $employees->links() }}
 </div>
 </div>
