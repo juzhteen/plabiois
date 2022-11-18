@@ -44,9 +44,7 @@ class AttendancePage extends Component
           "=",
           "employees.employee_id"
         )
-        ->whereDate("attendances.time_in", $this->attendance_date)
-        ->orWhereDate("attendances.time_out", $this->attendance_date)
-        ->get();
+        ->whereDate("attendances.created_at", $this->attendance_date)->get();
 
         if($this->attendance_date){
           $this->year_query = explode("-", $this->attendance_date)[0];
@@ -69,58 +67,54 @@ class AttendancePage extends Component
 
       if($employee){
 
-        $latest_attendance = Attendance::where('employee_employee_id', $employee->employee_id)
-          ->whereDate('time_in', today())
-          ->orWhereDate('time_out', today())
-          ->first();
+        if($this->attendance_type == "time_in"){
 
-        if($latest_attendance){
-          // Check if has time in
-          if($latest_attendance->time_in){
-            dd("Test");
-            // Create carbon object for latest attendance
-            $latest_attendance_carbon = Carbon::createFromFormat('Y-m-d H:i:s',  $latest_attendance->time_in);
-            // Check if date of latest record matches today's date
-            if($latest_attendance_carbon->toDateString() == $currentDate){
-              if($this->attendance_type == 'time_out'){
-                // Check if timeout exists
-                $latest_attendance_out = Attendance::where('employee_employee_id', $employee->employee_id)->where('time_out', null)->whereDate('created_at', today())->first();
-                if(!$latest_attendance_out){
-                  $this->dispatchBrowserEvent("attendance_out_exists");
-                }else{
-                  $latest_attendance->time_out = $currentDateTime;
-                  $latest_attendance->save();
-                  $this->dispatchBrowserEvent("attendance_out");
-                  $this->attendance_saved = true;
-                }
-              }else{
-                $this->dispatchBrowserEvent("attendance_in_exists");
-              }
-            }else{
-             $this->attendance_saved = true;
+          $latest_attendance_in = Attendance::where('employee_employee_id', $employee->employee_id)->whereDate('created_at', today())->first();
+
+          if($latest_attendance_in){
+            if($latest_attendance_in->time_in){
+              $this->dispatchBrowserEvent("attendance_in_exists");
+            } else if ($latest_attendance_in->time_out) {
+              $this->dispatchBrowserEvent("attendance_closed");
             }
-          }
-          if($latest_attendance->time_out){
-            $this->dispatchBrowserEvent("attendance_closed");
-          }
-        }else{
-
-          $attendance_in = new Attendance;
-          $attendance_in->employee_employee_id = $employee->employee_id;
-
-          if($this->attendance_type == 'time_in'){
+          } else {
+            $attendance_in = new Attendance;
+            $attendance_in->employee_employee_id = $employee->employee_id;
             $attendance_in->time_in = $currentDateTime;
-          }else{
-            $attendance_in->time_out = $currentDateTime;
+            $attendance_in->save();
+  
+            $this->dispatchBrowserEvent("attendance_in");
+             $this->attendance_saved = true;
           }
 
-          $attendance_in->save();
-          if($this->attendance_type == 'time_in'){
-            $this->dispatchBrowserEvent("attendance_in");
+        }
+
+        if($this->attendance_type == "time_out"){
+
+          $latest_attendance_out = Attendance::where('employee_employee_id', $employee->employee_id)->whereDate('created_at', today())->first();
+
+          if($latest_attendance_out){
+            if($latest_attendance_out->time_out){
+              $this->dispatchBrowserEvent("attendance_out_exists");
+            } else {
+              if($latest_attendance_out->time_in){
+                $latest_attendance_out->time_out = $currentDateTime;
+                $latest_attendance_out->save();
+
+                $this->dispatchBrowserEvent("attendance_out");
+                $this->attendance_saved = true;
+              }
+            }
           }else{
+            $attendance_in = new Attendance;
+            $attendance_in->employee_employee_id = $employee->employee_id;
+            $attendance_in->time_out = $currentDateTime;
+            $attendance_in->save();
+  
             $this->dispatchBrowserEvent("attendance_out");
+            $this->attendance_saved = true;
           }
-          $this->attendance_saved = true;
+          
         }
       }
     }
