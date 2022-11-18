@@ -44,7 +44,9 @@ class AttendancePage extends Component
           "=",
           "employees.employee_id"
         )
-        ->whereDate("attendances.created_at", $this->attendance_date)->get();
+        ->whereDate("attendances.time_in", $this->attendance_date)
+        ->orWhereDate("attendances.time_out", $this->attendance_date)
+        ->get();
 
         if($this->attendance_date){
           $this->year_query = explode("-", $this->attendance_date)[0];
@@ -75,6 +77,7 @@ class AttendancePage extends Component
         if($latest_attendance){
           // Check if has time in
           if($latest_attendance->time_in){
+            dd("Test");
             // Create carbon object for latest attendance
             $latest_attendance_carbon = Carbon::createFromFormat('Y-m-d H:i:s',  $latest_attendance->time_in);
             // Check if date of latest record matches today's date
