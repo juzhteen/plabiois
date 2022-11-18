@@ -182,6 +182,14 @@ window.addEventListener("attendance_out_exists", (event) => {
     });
 });
 
+window.addEventListener("attendance_closed", (event) => {
+    Snackbar.show({
+        text: "Attendance failed. Time out already recorded.",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
 window.addEventListener("barangay_certification_empty_fields", (event) => {
     Snackbar.show({
         text: "Field or fields are empty or Resident profile not found.",
