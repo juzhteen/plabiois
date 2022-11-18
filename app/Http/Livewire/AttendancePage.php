@@ -102,7 +102,13 @@ class AttendancePage extends Component
 
           $attendance_in = new Attendance;
           $attendance_in->employee_employee_id = $employee->employee_id;
-          $attendance_in->time_in = $currentDateTime;
+
+          if($attendance_type == 'time_in'){
+            $attendance_in->time_in = $currentDateTime;
+          }else{
+            $attendance_in->time_out = $currentDateTime;
+          }
+          
           $attendance_in->save();
 
           $this->dispatchBrowserEvent("attendance_in");
