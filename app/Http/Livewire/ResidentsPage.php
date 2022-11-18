@@ -37,21 +37,48 @@ class ResidentsPage extends Component
 
     public function render()
     {
-        $residents = $this->search
-            ? Resident::where("name", "like", "%" . $this->search . "%")
-                ->orWhere("age", "like", "%" . $this->search . "%")
-                ->orWhere("gender", "like", "%" . $this->search . "%")
-                ->orWhere("civil_status", "like", "%" . $this->search . "%")
-                ->orWhere("religion", "like", "%" . $this->search . "%")
-                ->orWhere("weight", "like", "%" . $this->search . "%")
-                ->orWhere("height", "like", "%" . $this->search . "%")
-                ->orWhere("purok", "like", "%" . $this->search . "%")
-                ->orWhere("email_address", "like", "%" . $this->search . "%")
-                ->orWhere("phone_number", "like", "%" . $this->search . "%")
-                ->orderBy($this->orderBy, $this->orderByOrder)
-                ->paginate(10)
-            : Resident::orderBy($this->orderBy, $this->orderByOrder)
-                ->paginate(10);
+        if($this->searchBy == "all"){
+            $residents = $this->search
+                ? Resident::where("name", "like", "%" . $this->search . "%")
+                    ->orWhere("age", "=", $this->search)
+                    ->orWhere("gender", "like", "%" . $this->search . "%")
+                    ->orWhere("civil_status", "like", "%" . $this->search . "%")
+                    ->orWhere("religion", "like", "%" . $this->search . "%")
+                    ->orWhere("weight", "=",$this->search)
+                    ->orWhere("height", "=", $this->search)
+                    ->orWhere("purok", "=", $this->search)
+                    ->orWhere("email_address", "like", "%" . $this->search . "%")
+                    ->orWhere("phone_number", "like", "%" . $this->search . "%")
+                    ->orderBy($this->orderBy, $this->orderByOrder)
+                    ->paginate(10)
+                : Resident::orderBy($this->orderBy, $this->orderByOrder)
+                    ->paginate(10);
+        }else{
+            $residents = $this->search
+                ? Resident::where($this->searchBy, "like", "%" . $this->search . "%")
+                    ->orderBy($this->orderBy, $this->orderByOrder)
+                    ->paginate(10)
+                : Resident::orderBy($this->orderBy, $this->orderByOrder)
+                    ->paginate(10);
+        }
+        // $residents = $this->search
+            // ? Resident::where("name", "like", "%" . $this->search . "%")
+            //     ->orWhere("age", "=", $this->search)
+            //     ->orWhere("gender", "like", "%" . $this->search . "%")
+            //     ->orWhere("civil_status", "like", "%" . $this->search . "%")
+            //     ->orWhere("religion", "like", "%" . $this->search . "%")
+            //     ->orWhere("weight", "=",$this->search)
+            //     ->orWhere("height", "=", $this->search)
+            //     ->orWhere("purok", "=", $this->search)
+            //     ->orWhere("email_address", "like", "%" . $this->search . "%")
+            //     ->orWhere("phone_number", "like", "%" . $this->search . "%")
+            //     ->orderBy($this->orderBy, $this->orderByOrder)
+            //     ->paginate(10)
+            // ? Resident::where($this->searchBy, "like", "%" . $this->search . "%")
+            //     ->orderBy($this->orderBy, $this->orderByOrder)
+            //     ->paginate(10)
+            // : Resident::orderBy($this->orderBy, $this->orderByOrder)
+            //     ->paginate(10);
 
         $total_residents = Resident::all()->count();
 

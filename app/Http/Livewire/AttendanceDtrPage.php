@@ -14,6 +14,8 @@ use Carbon\Carbon;
 
 class AttendanceDtrPage extends Component
 {
+  use WithPagination;
+  
   public $month_query;
   public $year_query;
   public $current_dtr;
