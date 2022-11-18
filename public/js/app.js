@@ -4595,6 +4595,13 @@ window.addEventListener("attendance_out_exists", function (event) {
     duration: 10000
   });
 });
+window.addEventListener("attendance_closed", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Attendance failed. Time out already recorded.",
+    pos: "top-right",
+    duration: 10000
+  });
+});
 window.addEventListener("barangay_certification_empty_fields", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
     text: "Field or fields are empty or Resident profile not found.",
