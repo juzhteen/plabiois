@@ -93,7 +93,12 @@
                         @foreach($attendances as $attendance)
                             <tr class="text-gray-700 dark:text-gray-400">
                                 <td class="px-4 py-3 font-bold text-sm">
-                                    {{ $attendance->employee->resident->name }}
+                                    @if($attendance->employee->resident)
+                                        @php
+                                            $resident = $attendance->employee->resident;
+                                            echo $resident->name;
+                                        @endphp
+                                    @endif
                                 </td>
                                 <td class="px-4 py-3 text-sm">
                                   @php
