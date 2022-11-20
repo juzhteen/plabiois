@@ -4516,7 +4516,7 @@ window.addEventListener("resident_added", function (event) {
 });
 window.addEventListener("resident_deleted", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
-    text: "Resident record deleted successfully!",
+    text: "Resident record deleted successfully! Request records also deleted. If an employee, employee record and attendance are also deleted.",
     pos: "top-right",
     duration: 10000
   });
