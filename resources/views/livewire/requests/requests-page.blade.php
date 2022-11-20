@@ -2,6 +2,11 @@
     @include('livewire.requests.request-delete-modal')
     @include('livewire.requests.request-accept-modal')
     @include('livewire.requests.request-complete-modal')
+    <style>
+        .add-button {
+            display: none;
+        }
+    </style>
     <!-- Cards -->
     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
         <!-- Card -->
@@ -85,6 +90,12 @@
                                 <div class="flex flex-row">@include('livewire.includes.order-by', ["field" => 'completed'])</div>
                             </span>
                         </th>
+                        <th class="px-4 py-3">
+                            <span class="flex flex-col">
+                                Contact number
+                               
+                            </span>
+                        </th>
                         <th class="px-4 py-3">Actions</th>
                     </tr>
                 </thead>
@@ -109,6 +120,9 @@
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $request->completed ? "Yes" : "No" }}
+                            </td>
+                            <td class="px-4 py-3 text-sm">
+                                {{ json_decode($request->form_fields)->contact_number }}
                             </td>
                             <td class="px-4 py-2 flex items-center">
                                 @if($request->accepted && !$request->completed)

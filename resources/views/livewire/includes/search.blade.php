@@ -6,7 +6,6 @@
               <select
                   class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
                   wire:model.debounce.2000ms="searchBy">
-                  <option value="all" selected>All</option>
                   @foreach ($fields as $key => $field)
                       <option value="{{ $key }}">{{ $field }}</option>
                   @endforeach
@@ -26,7 +25,7 @@
           </div>
       </div>
       <button wire:click.prevent="$toggle('openEdit')"
-          class="px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-full active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue shadow-2xl">
+          class="add-button px-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-full active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue shadow-2xl">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
               stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />

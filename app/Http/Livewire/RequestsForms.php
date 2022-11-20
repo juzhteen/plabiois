@@ -27,6 +27,7 @@ class RequestsForms extends Component
     public $complainants;
     public $respondents;
     public $invitation_date;
+    public $contact_number;
 
     public $residentQuery, $residentQueryResult;
     public $resident_id;
@@ -93,14 +94,16 @@ class RequestsForms extends Component
             $request_years = $this->years_of_residency;
             $request_occupation = $this->occupation;
             $request_purpose = $this->purpose;
-            return compact("request_name", "request_years", "request_occupation", "request_purpose");
+            $contact_number = $this->contact_number;
+            return compact("request_name", "request_years", "request_occupation", "request_purpose", "contact_number");
         }
 
         if($this->form_name == "Barangay Clearance"){
             $request_name = $this->full_name;
             $request_date_of_birth = $this->date_of_birth;
             $request_purpose = $this->purpose;
-            return compact("request_name", "request_date_of_birth", "request_purpose");
+            $contact_number = $this->contact_number;
+            return compact("request_name", "request_date_of_birth", "request_purpose", "contact_number");
         }
 
         if($this->form_name == "Certificate of Low Income"){
@@ -108,13 +111,15 @@ class RequestsForms extends Component
             $request_date_of_birth = $this->date_of_birth;
             $request_mother_name = $this->mother_name;
             $request_income = $this->income;
-            return compact("request_name", "request_date_of_birth", "request_mother_name", "request_income");
+            $contact_number = $this->contact_number;
+            return compact("request_name", "request_date_of_birth", "request_mother_name", "request_income", "contact_number");
         }
 
         if($this->form_name == "Certificate of Indigency"){
             $request_name = $this->full_name;
             $request_date_of_birth = $this->date_of_birth;
-            return compact("request_name", "request_date_of_birth");
+            $contact_number = $this->contact_number;
+            return compact("request_name", "request_date_of_birth", "contact_number");
         }
 
         if($this->form_name == "Case Invitation"){
@@ -122,7 +127,8 @@ class RequestsForms extends Component
             $request_complainants = $this->complainants;
             $request_respondents = $this->respondents;
             $request_date = $this->invitation_date;
-            return compact("request_name", "request_complainants", "request_respondents", "request_date");
+            $contact_number = $this->contact_number;
+            return compact("request_name", "request_complainants", "request_respondents", "request_date", "contact_number");
         }
 
     }
