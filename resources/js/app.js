@@ -92,7 +92,7 @@ window.addEventListener("resident_added", (event) => {
 
 window.addEventListener("resident_deleted", (event) => {
     Snackbar.show({
-        text: "Resident record deleted successfully!",
+        text: "Resident record deleted successfully! Request records also deleted. If an employee, employee record and attendance are also deleted.",
         pos: "top-right",
         duration: 10000,
     });

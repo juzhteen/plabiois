@@ -7,6 +7,8 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Resident;
 use App\Models\Employee;
+use App\Models\Attendance;
+use App\Models\Request;
 
 class ResidentsPage extends Component
 {
@@ -162,13 +164,39 @@ class ResidentsPage extends Component
 
     public function delete()
     {
-        Resident::findOrFail($this->resident_id)->delete();
-        $this->dispatchBrowserEvent("resident_deleted");
+        $resident = Resident::where('resident_id', $this->resident_id)->first();
+
         // Delete employee record
         $employee = Employee::where('resident_resident_id', $this->resident_id)->first();
+         
+        // Delete attendance records
+        $attendances = Attendance::where('employee_employee_id', $employee->employee_id)->get();
+
+        // Delete requests records
+        $requests = Request::where('resident_resident_id', $this->resident_id)->get();
+
+        if($resident){
+            $resident->delete();
+        }
+
         if($employee){
             $employee->delete();
         }
+
+        if($attendances){
+            foreach($attendances as $attendance){
+                Attendance::where('attendance_id', $attendance->attendance_id)->delete();
+            }
+        }
+
+        if($requests){
+            foreach($requests as $request){
+                Request::where('request_id', $request->request_id)->delete();
+            }
+        }
+
+        $this->dispatchBrowserEvent("resident_deleted");
+        
         $this->clear();
         $this->closeDeleteModal();
     }
