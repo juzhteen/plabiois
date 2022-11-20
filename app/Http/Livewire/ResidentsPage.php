@@ -6,6 +6,7 @@ use Livewire\Component;
 
 use Livewire\WithPagination;
 use App\Models\Resident;
+use App\Models\Employee;
 
 class ResidentsPage extends Component
 {
@@ -162,8 +163,12 @@ class ResidentsPage extends Component
     public function delete()
     {
         Resident::findOrFail($this->resident_id)->delete();
-        session()->flash("warning", "Resident deleted successfully");
         $this->dispatchBrowserEvent("resident_deleted");
+        // Delete employee record
+        $employee = Employee::where('resident_resident_id', $this->resident_id)->first();
+        if($employee){
+            $employee->delete();
+        }
         $this->clear();
         $this->closeDeleteModal();
     }

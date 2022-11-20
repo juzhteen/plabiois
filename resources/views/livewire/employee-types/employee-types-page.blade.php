@@ -63,7 +63,14 @@
                   <td class="px-4 py-3 text-sm flex flex-col">
                     @if($type->employees->count())
                       @foreach($type->employees as $employee)
-                      <span class="py-2 px-5 rounded-full text-md text-black bg-gray-100 hover:bg-gray-200 hover:drop-shadow-md duration-300 mb-2 w-max-content">{{ $employee->resident->name }}</span>
+                      <span class="py-2 px-5 rounded-full text-md text-black bg-gray-100 hover:bg-gray-200 hover:drop-shadow-md duration-300 mb-2 w-max-content">
+                          @if($employee->resident)
+                            @php
+                                $resident = $employee->resident;
+                                echo $resident->name;
+                            @endphp
+                          @endif
+                      </span>
                       @endforeach
                     @endif
                   </td>
