@@ -26,16 +26,20 @@ class EmployeeTypesPage extends Component
 
     public function mount()
     {
-        $this->searchBy = "all";
+        $this->searchBy = "position";
     }
 
     public function render()
     {
         $employee_types = $this->search
-            ? EmployeeType::where("position", "like", "%" . $this->search . "%")
+            ? EmployeeType::join('employees', 'employee_types.employee_type_id', '=', 'employees.employee_type_employee_type_id')
+                ->join('residents', 'employees.resident_resident_id', '=', 'residents.resident_id')
+                ->where($this->searchBy, "like", "%" . $this->search . "%")
                 ->orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10)
-            : EmployeeType::orderBy($this->orderBy, $this->orderByOrder)
+            : EmployeeType::join('employees', 'employee_types.employee_type_id', '=', 'employees.employee_type_employee_type_id')
+                ->join('residents', 'employees.resident_resident_id', '=', 'residents.resident_id')
+                ->orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10);
 
         $total_positions = EmployeeType::all()->count();
