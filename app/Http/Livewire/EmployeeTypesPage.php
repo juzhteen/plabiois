@@ -31,15 +31,22 @@ class EmployeeTypesPage extends Component
 
     public function render()
     {
+        // $employee_types = $this->search
+        //     ? EmployeeType::join('employees', 'employee_types.employee_type_id', '=', 'employees.employee_type_employee_type_id')
+        //         ->join('residents', 'employees.resident_resident_id', '=', 'residents.resident_id')
+        //         ->where($this->searchBy, "like", "%" . $this->search . "%")
+        //         ->orderBy($this->orderBy, $this->orderByOrder)
+        //         ->paginate(10)
+        //     : EmployeeType::join('employees', 'employee_types.employee_type_id', '=', 'employees.employee_type_employee_type_id')
+        //         ->join('residents', 'employees.resident_resident_id', '=', 'residents.resident_id')
+        //         ->orderBy($this->orderBy, $this->orderByOrder)
+        //         ->paginate(10);
+
         $employee_types = $this->search
-            ? EmployeeType::join('employees', 'employee_types.employee_type_id', '=', 'employees.employee_type_employee_type_id')
-                ->join('residents', 'employees.resident_resident_id', '=', 'residents.resident_id')
-                ->where($this->searchBy, "like", "%" . $this->search . "%")
+            ? EmployeeType::where("position", "like", "%" . $this->search . "%")
                 ->orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10)
-            : EmployeeType::join('employees', 'employee_types.employee_type_id', '=', 'employees.employee_type_employee_type_id')
-                ->join('residents', 'employees.resident_resident_id', '=', 'residents.resident_id')
-                ->orderBy($this->orderBy, $this->orderByOrder)
+            : EmployeeType::orderBy($this->orderBy, $this->orderByOrder)
                 ->paginate(10);
 
         $total_positions = EmployeeType::all()->count();
