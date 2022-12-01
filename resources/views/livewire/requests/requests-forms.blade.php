@@ -23,6 +23,8 @@
                             wire:click="$set('form_name', 'Certificate of Indigency')">Certificate of Indigency</a>
                         <a class="cursor-pointer border border-gray-500 p-2 rounded-md mt-5 font-bold @if ($form_name == 'Certificate of Low Income') bg-gray-700 text-white @endif"
                             wire:click="$set('form_name', 'Certificate of Low Income')">Certificate of Low Income</a>
+                        <a class="cursor-pointer border border-gray-500 p-2 rounded-md mt-5 font-bold @if ($form_name == 'Barangay Residency') bg-gray-700 text-white @endif"
+                            wire:click="$set('form_name', 'Barangay Residency')">Barangay Residency</a>
                     </div>
                 </div>
                 <div
@@ -285,7 +287,53 @@
                             </div>
                         </div>
                     @endif
-
+                    @if ($form_name == 'Barangay Residency')
+                    <div>
+                        <div>
+                            <h2 class="text-gray-900 text-lg font-bold title-font mb-5">Barangay Residency</h2>
+                            <input type="hidden" wire:model="form_id">
+                            <div class="relative mb-4">
+                                <label for="full-name" class="leading-7 text-sm text-gray-600">Resident
+                                    profile</label>
+                                <input
+                                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                    placeholder="Search for the resident profile" type="text"
+                                    wire:model="residentQuery" id="residentQuery" required />
+                                @if (!empty($residentQueryResult) && $residentQuery != '')
+                                    <ul
+                                        class="shadow-md absolute z-10 top-17 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                                        @foreach ($residentQueryResult as $resident)
+                                            <li class="py-2 px-4 w-full rounded-t-lg border-b border-gray-200 dark:border-gray-600 cursor-pointer"
+                                                wire:click.prevent="setResidentProfile({{ $resident }})">
+                                                {{ $resident->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                @endif
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="date-of-birth" class="leading-7 text-sm text-gray-600">Date of
+                                    birth</label>
+                                <input type="date" id="date-of-birth" wire:model="date_of_birth"
+                                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="purpose" class="leading-7 text-sm text-gray-600">Purpose</label>
+                                <input type="text" id="purpose" wire:model="purpose"
+                                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                    placeholder="Purpose">
+                            </div>
+                            <div class="relative mb-4">
+                                <label for="contact_number" class="leading-7 text-sm text-gray-600">Contact
+                                    number</label>
+                                <input type="text" id="contact_number" wire:model="contact_number"
+                                    class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                    placeholder="Contact number">
+                            </div>
+                            <button wire:click.prevent="send_request"
+                                class="text-white bg-blue-500 border-0 py-2 px-8 focus:outline-none hover:bg-blue-600 rounded text-lg font-bold">Submit</button>
+                        </div>
+                    </div>
+                @endif
                 </div>
             </div>
         @endif

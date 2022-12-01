@@ -8,7 +8,7 @@
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to
     certify further that the above-named person belongs to an indigent family of this Barangay.</p>
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This
-    certification is being issued for whatever legal purposes that may serve him/her best.</p>
+    certification is being issued for <u class="lowercase">{{ $form_fields->request_purpose }}</u>.</p>
 <p x-data="data()" class="mt-4">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issued this
     <a @click.prevent @dblclick="toggleEditingState" x-show="!isEditing" x-text="text"

@@ -27,23 +27,24 @@
     ]]) --}}
 
     <div class="flex justify-between items-center shadow-xs p-3 rounded-lg mb-5 mt-10">
-      <div class="flex w-full items-center">
-        <label class="dark:text-white mr-5">Select date</label>
-        <input wire:model.debounce.2000ms="attendance_month_year"
-        class="pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-200 border-blue-500 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-blue-300 focus:outline-none focus:shadow-outline-blue form-input"
-        type="month" aria-label="Select date" />
-        <a wire:click="close_dtr" class="font-bold px-4 py-2 text-sm leading-5 text-white transition-colors duration-150 bg-yellow-600 border border-transparent rounded-lg active:bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:shadow-outline-yellow ml-2 cursor-pointer">Set</a>
-        <span class="ml-2 font-bold w-full">
-            {{ \Carbon\Carbon::createFromDate($year_query, $month_query)->format('F Y'); }}
-        </span>
-      </div>
-      <div class="">
-          <a href="{{ route('attendance') }}"
-              class="font-bold px-4 py-2 text-sm leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
-              BACK
-          </a>
-      </div>
-  </div>
+        <div class="flex w-full items-center">
+            <label class="dark:text-white mr-5">Select date</label>
+            <input wire:model.debounce.2000ms="attendance_month_year"
+                class="pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-200 border-blue-500 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-blue-300 focus:outline-none focus:shadow-outline-blue form-input"
+                type="month" aria-label="Select date" />
+            <a wire:click="close_dtr"
+                class="font-bold px-4 py-2 text-sm leading-5 text-white transition-colors duration-150 bg-yellow-600 border border-transparent rounded-lg active:bg-yellow-600 hover:bg-yellow-700 focus:outline-none focus:shadow-outline-yellow ml-2 cursor-pointer">Set</a>
+            <span class="ml-2 font-bold w-full">
+                {{ \Carbon\Carbon::createFromDate($year_query, $month_query)->format('F Y') }}
+            </span>
+        </div>
+        <div class="">
+            <a href="{{ route('attendance') }}"
+                class="font-bold px-4 py-2 text-sm leading-5 text-white transition-colors duration-150 bg-blue-600 border border-transparent rounded-lg active:bg-blue-600 hover:bg-blue-700 focus:outline-none focus:shadow-outline-blue">
+                BACK
+            </a>
+        </div>
+    </div>
 
     <!-- New Table -->
     <div class="w-full overflow-hidden rounded-lg shadow-md">
@@ -110,53 +111,61 @@
                                         @php
                                             $dates = [];
                                             
-                                            for ($i = 1; $i < cal_days_in_month(CAL_GREGORIAN,$month_query,$year_query) + 1; ++$i) {
+                                            for ($i = 1; $i < cal_days_in_month(CAL_GREGORIAN, $month_query, $year_query) + 1; ++$i) {
                                                 $dates[] = \Carbon\Carbon::createFromDate($year_query, $month_query, $i)->format('d');
                                             }
                                             
                                         @endphp
                                         @foreach ($dates as $date)
-                                            <span class="p-3 m-1 border border-gray-300 justify-center items-center text-center rounded-lg">
+                                            <span
+                                                class="p-3 m-1 border border-gray-300 justify-center items-center text-center rounded-lg">
                                                 <b>{{ $date }}</b>
                                                 <span class="flex flex-col">
-                                                    @foreach ($employee_dtr_record as $record)
-                                                        @php
-                                                            $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in)->day;
-                                                        @endphp
-                                                        @if (in_array($day_from_attendance, $dates) && $date == $day_from_attendance)
-  
-                                                                @if ($record->time_in) 
+                                                    @if ($employee_dtr_record)
+                                                        @foreach ($employee_dtr_record as $record)
+                                                            @php
+                                                                $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in)->day;
+                                                            @endphp
+                                                            @if (in_array($day_from_attendance, $dates) && $date == $day_from_attendance)
+                                                                @if ($record->time_in)
                                                                     @php
-                                                                      $time_in = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in);
+                                                                        if($record->time_in){
+                                                                            $time_in = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in);
+                                                                        }
+                                                                        
                                                                     @endphp
-                                                                   <span class="bg-green-100 text-sm p-2 rounded-md mb-2 font-medium mt-2">
-                                                                    {{ $time_in->format('h:i A') }}
-                                                                   </span>
+                                                                    <span
+                                                                        class="bg-green-100 text-sm p-2 rounded-md mb-2 font-medium mt-2">
+                                                                        {{ $time_in->format('h:i A') }}
+                                                                    </span>
                                                                 @endif
-                                                                @if ($record->time_out) 
+                                                                @if ($record->time_out)
                                                                     @php
-                                                                      $time_out = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out);
+                                                                        $time_out = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out);
                                                                     @endphp
-                                                                   <span class="bg-red-100 text-sm p-2 rounded-md font-medium">
-                                                                    {{ $time_out->format('h:i A') }}
-                                                                   </span>
+                                                                    <span
+                                                                        class="bg-red-100 text-sm p-2 rounded-md font-medium">
+                                                                        {{ $time_out->format('h:i A') }}
+                                                                    </span>
                                                                 @endif
-                                                        @endif
-                                                    @endforeach
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
                                                 </span>
                                             </span>
                                         @endforeach
-                                        
-                                        <td class="px-4 py-3">
-                                          <a target="_blank" href="{{ route('attendance-dtr-print', [
-                                            'employee_id' => $current_dtr,
-                                            'year' => $year_query,
-                                            'month' => $month_query
-                                          ]) }}"
+
+                                    <td class="px-4 py-3">
+                                        <a target="_blank"
+                                            href="{{ route('attendance-dtr-print', [
+                                                'employee_id' => $current_dtr,
+                                                'year' => $year_query,
+                                                'month' => $month_query,
+                                            ]) }}"
                                             class="font-bold px-4 py-2 text-sm leading-5 text-white transition-colors duration-150 bg-green-600 border border-transparent rounded-lg active:bg-green-600 hover:bg-green-700 focus:outline-none focus:shadow-outline-green">
                                             PRINT
                                         </a>
-                                      </td>
+                                    </td>
                                     </td>
                                 </tr>
                             @endif
