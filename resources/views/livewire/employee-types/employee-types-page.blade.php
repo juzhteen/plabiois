@@ -34,8 +34,7 @@
     </div>
 
     @include('livewire.includes.search', ["fields" => [
-      "position" => "Position",
-      "name" => "Name"
+      "position" => "Position"
     ]])
   
     <!-- New Table -->

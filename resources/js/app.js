@@ -37,8 +37,6 @@ if (window.location.pathname == "/attendance") {
                 camQrResult.textContent = error;
                 camQrResult.style.color = "inherit";
             },
-            // highlightScanRegion: true,
-            // highlightCodeOutline: true,
             maxScansPerSecond: 1
         }
     );

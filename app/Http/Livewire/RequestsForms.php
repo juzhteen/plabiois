@@ -119,7 +119,8 @@ class RequestsForms extends Component
             $request_name = $this->full_name;
             $request_date_of_birth = $this->date_of_birth;
             $contact_number = $this->contact_number;
-            return compact("request_name", "request_date_of_birth", "contact_number");
+            $request_purpose = $this->purpose;
+            return compact("request_name", "request_purpose", "request_date_of_birth", "contact_number");
         }
 
         if($this->form_name == "Case Invitation"){
@@ -129,6 +130,14 @@ class RequestsForms extends Component
             $request_date = $this->invitation_date;
             $contact_number = $this->contact_number;
             return compact("request_name", "request_complainants", "request_respondents", "request_date", "contact_number");
+        }
+
+        if($this->form_name == "Barangay Residency"){
+            $request_name = $this->full_name;
+            $request_date_of_birth = $this->date_of_birth;
+            $contact_number = $this->contact_number;
+            $request_purpose = $this->purpose;
+            return compact("request_name", "request_date_of_birth", "request_purpose", "contact_number");
         }
 
     }
@@ -160,7 +169,7 @@ class RequestsForms extends Component
         }
 
         if($this->form_name == "Certificate of Indigency"){
-            if($this->resident_id == null || $this->date_of_birth == ""){
+            if($this->resident_id == null || $this->date_of_birth == "" || $this->purpose == ""){
                 $this->no_empty_fields = false;
             }else{
                 $this->no_empty_fields = true;
@@ -169,6 +178,14 @@ class RequestsForms extends Component
 
         if($this->form_name == "Case Invitation"){
             if($this->resident_id == null || $this->complainants == "" || $this->respondents == "" || $this->invitation_date == ""){
+                $this->no_empty_fields = false;
+            }else{
+                $this->no_empty_fields = true;
+            }
+        }
+
+        if($this->form_name == "Barangay Residency"){
+            if($this->resident_id == null || $this->date_of_birth == "" || $this->purpose == ""){
                 $this->no_empty_fields = false;
             }else{
                 $this->no_empty_fields = true;

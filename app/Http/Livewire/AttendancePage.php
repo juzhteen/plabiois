@@ -90,9 +90,7 @@ class AttendancePage extends Component
         }
 
         if($this->attendance_type == "time_out"){
-
           $latest_attendance_out = Attendance::where('employee_employee_id', $employee->employee_id)->whereDate('created_at', today())->first();
-
           if($latest_attendance_out){
             if($latest_attendance_out->time_out){
               $this->dispatchBrowserEvent("attendance_out_exists");
@@ -114,7 +112,6 @@ class AttendancePage extends Component
             $this->dispatchBrowserEvent("attendance_out");
             $this->attendance_saved = true;
           }
-          
         }
       }
     }
