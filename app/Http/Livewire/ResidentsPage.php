@@ -30,7 +30,7 @@ class ResidentsPage extends Component
         'religion' => 'required',
         'weight' => 'required|integer',
         'height' => 'required|integer',
-        'purok' => 'required|integer|min:1|max:6'
+        'purok' => 'required|integer|min:1|max:7'
     ];
 
     public function mount()
