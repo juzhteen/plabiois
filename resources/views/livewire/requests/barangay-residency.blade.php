@@ -10,16 +10,16 @@
     certify that the above-name person is a bonafide resident of the said barangay.</p>
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This
     certification is issued <u class="">{{ $form_fields->request_purpose }}</u>.</p>
-    <p x-data="data()" class="mt-4">
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issued this
-      <a @click.prevent @dblclick="toggleEditingState" x-show="!isEditing" x-text="text"
-          class="select-none cursor-pointer underline text-black"></a>
-      <input type="text" x-model="text" x-show="isEditing" @click.away="toggleEditingState"
-          @keydown.enter="disableEditing" @keydown.window.escape="disableEditing"
-          class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-l px-4 appearance-none leading-normal w-128"
-          x-ref="input"> at the Office of the Barangay Chairman,
-      Barangay Paulino Labio, Northern Kabuntalan, Maguindanao.
-  </p>
+<p x-data="data()" class="mt-4">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issued this
+    <a @click.prevent @dblclick="toggleEditingState" x-show="!isEditing" x-text="text"
+        class="select-none cursor-pointer underline text-black"></a>
+    <input type="text" x-model="text" x-show="isEditing" @click.away="toggleEditingState"
+        @keydown.enter="disableEditing" @keydown.window.escape="disableEditing"
+        class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-l px-4 appearance-none leading-normal w-128"
+        x-ref="input"> at the Office of the Barangay Chairman,
+    Barangay Paulino Labio, Northern Kabuntalan, Maguindanao.
+</p>
 <p class="text-right mt-40 underline">
     @php
         $bc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
@@ -31,22 +31,22 @@
 <p class="text-right">Punong Barangay</p>
 
 <script>
-  function data() {
-      return {
-          text: "Double click to enter date",
-          isEditing: false,
-          toggleEditingState() {
-              this.isEditing = !this.isEditing;
+    function data() {
+        return {
+            text: "Double click to enter date",
+            isEditing: false,
+            toggleEditingState() {
+                this.isEditing = !this.isEditing;
 
-              if (this.isEditing) {
-                  this.$nextTick(() => {
-                      this.$refs.input.focus();
-                  });
-              }
-          },
-          disableEditing() {
-              this.isEditing = false;
-          }
-      };
-  }
+                if (this.isEditing) {
+                    this.$nextTick(() => {
+                        this.$refs.input.focus();
+                    });
+                }
+            },
+            disableEditing() {
+                this.isEditing = false;
+            }
+        };
+    }
 </script>
