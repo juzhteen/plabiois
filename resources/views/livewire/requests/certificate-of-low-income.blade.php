@@ -2,12 +2,12 @@
 <p class="mb-4">TO WHOM IT MAY CONCERN:</p>
 
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that
-    <u>{{ $form_fields->request_mother_name }}</u>, <u>{{ $request->resident->age }}</u> years of age, was born on
+    <u>{{ $form_fields->request_mother_name }}</u>, <u>{{ \Carbon\Carbon::parse($form_fields->request_date_of_birth)->diff(\Carbon\Carbon::now())->format('%y years of age') }}</u>, was born on
     {{ date('F jS, Y', strtotime($form_fields->request_date_of_birth)) }}, Filipino and a bonafide resident of Barangay
     Paulino Labio, Northern Kabuntalan, Maguindanao.
 </p>
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to
-    certify further that above-named person is the mother of <u>{{ $request->resident->name }}</u>.</p>
+    certify further that above-named person is the parent/guardian of <u>{{ $request->resident->name }}</u>.</p>
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to
     certify further that his/her has an income of <u>{{ $form_fields->request_income }}</u> pesos monthly.</p>
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This
@@ -21,7 +21,9 @@
         $bc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
             ->where('employee_types.position', 'Barangay Chairman')
             ->first();
-        echo $bc->resident->name;
+        if($bc){
+            echo $bc->resident->name;
+        }
     @endphp
 </p>
 <p class="text-right">Punong Barangay</p>

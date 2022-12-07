@@ -156,13 +156,12 @@
                                     @endif
                                 </div>
                                 <div class="relative mb-4">
-                                    <label for="mother-name" class="leading-7 text-sm text-gray-600">Mother's
-                                        Name</label>
+                                    <label for="mother-name" class="leading-7 text-sm text-gray-600">Parent or Guardian's Name</label>
                                     <input type="text" id="mother-name" wire:model="mother_name"
                                         class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                                 <div class="relative mb-4">
-                                    <label for="date-of-birth" class="leading-7 text-sm text-gray-600">Date of
+                                    <label for="date-of-birth" class="leading-7 text-sm text-gray-600">Parent/Guardian Date of
                                         birth</label>
                                     <input type="date" id="date-of-birth" wire:model="date_of_birth"
                                         class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">

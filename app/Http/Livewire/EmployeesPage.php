@@ -141,13 +141,12 @@ class EmployeesPage extends Component
 
     public function store()
     {
-
         if ($this->employee_id){
             Employee::updateOrCreate(
                 ["employee_id" => $this->employee_id],
                 [
                     "resident_id" => $this->resident_id,
-                    "employee_type_id" => $this->employee_type_id,
+                    "employee_type_employee_type_id" => $this->employee_type_id,
                     "term_start" => $this->term_start,
                     "term_end" => $this->term_end
                 ]

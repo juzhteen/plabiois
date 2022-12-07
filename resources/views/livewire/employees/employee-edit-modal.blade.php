@@ -21,8 +21,8 @@
                         Resident profile
                     </span>
                     <input
-                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        placeholder="Search for the resident profile" type="text" wire:model="residentQuery" id="residentQuery" required/>
+                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input @if($employee_id) bg-gray-100 @endif"
+                        placeholder="Search for the resident profile" type="text" wire:model="residentQuery" id="residentQuery" required @if($employee_id) disabled @endif />
                 </label>
                 @if(!empty($residentQueryResult) && ($residentQuery != "" ))
                     <ul class="shadow-md absolute z-10 top-10 w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
