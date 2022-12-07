@@ -15,11 +15,11 @@ class Document extends Model
         "document_id",
         "title",
         "description",
-        "uploaded_by"
+        "user_id"
     ];
 
     public function uploader()
     {
-        return $this->hasOne(User::class, "id", "uploaded_by");
+        return $this->hasOne(User::class, "id", "user_id");
     }
 }

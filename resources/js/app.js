@@ -21,7 +21,6 @@ if (window.location.pathname == "/attendance") {
     const camQrResult = document.getElementById("cam-qr-result");
 
     function setResult(label, result) {
-        console.log(result.data);
         label.style.fontWeight = "bold";
         label.textContent = result.data;
         label.style.color = "teal";
@@ -41,16 +40,16 @@ if (window.location.pathname == "/attendance") {
         }
     );
 
-    const qr_scanner_start = document.querySelector(".qr-scanner-start");
-    const qr_scanner_stop = document.querySelector(".qr-scanner-stop");
+    // const qr_scanner_start = document.querySelector(".qr-scanner-start");
+    // const qr_scanner_stop = document.querySelector(".qr-scanner-stop");
 
-    qr_scanner_start.addEventListener("click", function () {
-        qrScanner.start();
-    });
+    // qr_scanner_start.addEventListener("click", function () {
+    //     qrScanner.start();
+    // });
 
-    qr_scanner_stop.addEventListener("click", function () {
-        qrScanner.stop();
-    });
+    // qr_scanner_stop.addEventListener("click", function () {
+    //     qrScanner.stop();
+    // });
 
     const camList = document.getElementById("cam-list");
 
@@ -131,6 +130,14 @@ window.addEventListener("employee_updated", (event) => {
 window.addEventListener("employee_added", (event) => {
     Snackbar.show({
         text: "Employee record added successfully!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("employee_code_exists", (event) => {
+    Snackbar.show({
+        text: "The generated employee code already exists. Please click save again to generate a new one.",
         pos: "top-right",
         duration: 10000,
     });
@@ -271,6 +278,14 @@ window.addEventListener("user_approved", (event) => {
 window.addEventListener("employee_type_exists", (event) => {
     Snackbar.show({
         text: "Position or employee type already exists!",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
+window.addEventListener("nothing_to_update_document", (event) => {
+    Snackbar.show({
+        text: "Nothing to update!",
         pos: "top-right",
         duration: 10000,
     });

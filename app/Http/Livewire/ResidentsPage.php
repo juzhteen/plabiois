@@ -40,14 +40,14 @@ class ResidentsPage extends Component
 
     public function render()
     {
-        if($this->searchBy == "all"){
+        if ($this->searchBy == "all") {
             $residents = $this->search
                 ? Resident::where("name", "like", "%" . $this->search . "%")
                     ->orWhere("age", "=", $this->search)
-                    ->orWhere("gender", "like", "%" . $this->search . "%")
+                    ->orWhere("gender", "=", $this->search)
                     ->orWhere("civil_status", "like", "%" . $this->search . "%")
                     ->orWhere("religion", "like", "%" . $this->search . "%")
-                    ->orWhere("weight", "=",$this->search)
+                    ->orWhere("weight", "=", $this->search)
                     ->orWhere("height", "=", $this->search)
                     ->orWhere("purok", "=", $this->search)
                     ->orWhere("email_address", "like", "%" . $this->search . "%")
@@ -56,7 +56,7 @@ class ResidentsPage extends Component
                     ->paginate(10)
                 : Resident::orderBy($this->orderBy, $this->orderByOrder)
                     ->paginate(10);
-        }else{
+        } else {
             $residents = $this->search
                 ? Resident::where($this->searchBy, "like", "%" . $this->search . "%")
                     ->orderBy($this->orderBy, $this->orderByOrder)
@@ -64,24 +64,6 @@ class ResidentsPage extends Component
                 : Resident::orderBy($this->orderBy, $this->orderByOrder)
                     ->paginate(10);
         }
-        // $residents = $this->search
-            // ? Resident::where("name", "like", "%" . $this->search . "%")
-            //     ->orWhere("age", "=", $this->search)
-            //     ->orWhere("gender", "like", "%" . $this->search . "%")
-            //     ->orWhere("civil_status", "like", "%" . $this->search . "%")
-            //     ->orWhere("religion", "like", "%" . $this->search . "%")
-            //     ->orWhere("weight", "=",$this->search)
-            //     ->orWhere("height", "=", $this->search)
-            //     ->orWhere("purok", "=", $this->search)
-            //     ->orWhere("email_address", "like", "%" . $this->search . "%")
-            //     ->orWhere("phone_number", "like", "%" . $this->search . "%")
-            //     ->orderBy($this->orderBy, $this->orderByOrder)
-            //     ->paginate(10)
-            // ? Resident::where($this->searchBy, "like", "%" . $this->search . "%")
-            //     ->orderBy($this->orderBy, $this->orderByOrder)
-            //     ->paginate(10)
-            // : Resident::orderBy($this->orderBy, $this->orderByOrder)
-            //     ->paginate(10);
 
         $total_residents = Resident::all()->count();
 
@@ -166,37 +148,34 @@ class ResidentsPage extends Component
     {
         $resident = Resident::where('resident_id', $this->resident_id)->first();
 
-        // Delete employee record
-        $employee = Employee::where('resident_resident_id', $this->resident_id)->first();
-         
-        // Delete attendance records
-        $attendances = Attendance::where('employee_employee_id', $employee->employee_id)->get();
-
-        // Delete requests records
-        $requests = Request::where('resident_resident_id', $this->resident_id)->get();
-
-        if($resident){
+        if ($resident) {
             $resident->delete();
-        }
 
-        if($employee){
-            $employee->delete();
-        }
+            // Delete employee record
+            $employee = Employee::where('resident_resident_id', $this->resident_id)->first();
 
-        if($attendances){
-            foreach($attendances as $attendance){
-                Attendance::where('attendance_id', $attendance->attendance_id)->delete();
+            if ($employee) {
+                $employee->delete();
+
+                // Delete attendance records
+                $attendances = Attendance::where('employee_employee_id', $employee->employee_id)->get();
+
+                foreach ($attendances as $attendance) {
+                    Attendance::where('attendance_id', $attendance->attendance_id)->delete();
+                }
             }
-        }
 
-        if($requests){
-            foreach($requests as $request){
-                Request::where('request_id', $request->request_id)->delete();
+            // Delete requests records
+            $requests = Request::where('resident_resident_id', $this->resident_id)->get();
+            if ($requests) {
+                foreach ($requests as $request) {
+                    Request::where('request_id', $request->request_id)->delete();
+                }
             }
         }
 
         $this->dispatchBrowserEvent("resident_deleted");
-        
+
         $this->clear();
         $this->closeDeleteModal();
     }

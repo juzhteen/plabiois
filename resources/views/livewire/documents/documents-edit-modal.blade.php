@@ -26,14 +26,13 @@
                         placeholder="Description" type="text" wire:model="description" id="description" />
                 </label>
 
-                <label class="block text-sm mt-4">
-                    <input
-                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                        placeholder="File" type="file" wire:model="file" id="file{{ $iteration }}" /><br>
-                    @if($document_id)
-                        <span class="text-red-500">Leave this field if you do not want to replace the uploaded file</span>
-                    @endif
-                </label>
+                @if (!$document_id)
+                    <label class="block text-sm mt-4">
+                        <input
+                            class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                            placeholder="File" type="file" wire:model="file" id="file{{ $iteration }}" /><br>
+                    </label>
+                @endif
 
             </div>
             <footer

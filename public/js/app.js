@@ -4447,7 +4447,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 if (window.location.pathname == "/attendance") {
   var setResult = function setResult(label, result) {
-    console.log(result.data);
     label.style.fontWeight = "bold";
     label.textContent = result.data;
     label.style.color = "teal";
@@ -4472,15 +4471,15 @@ if (window.location.pathname == "/attendance") {
       camQrResult.style.color = "inherit";
     },
     maxScansPerSecond: 1
-  });
-  var qr_scanner_start = document.querySelector(".qr-scanner-start");
-  var qr_scanner_stop = document.querySelector(".qr-scanner-stop");
-  qr_scanner_start.addEventListener("click", function () {
-    qrScanner.start();
-  });
-  qr_scanner_stop.addEventListener("click", function () {
-    qrScanner.stop();
-  });
+  }); // const qr_scanner_start = document.querySelector(".qr-scanner-start");
+  // const qr_scanner_stop = document.querySelector(".qr-scanner-stop");
+  // qr_scanner_start.addEventListener("click", function () {
+  //     qrScanner.start();
+  // });
+  // qr_scanner_stop.addEventListener("click", function () {
+  //     qrScanner.stop();
+  // });
+
   var camList = document.getElementById("cam-list");
   qrScanner.start().then(function () {
     qr_scanner__WEBPACK_IMPORTED_MODULE_1__["default"].listCameras(true).then(function (cameras) {
@@ -4550,6 +4549,13 @@ window.addEventListener("employee_updated", function (event) {
 window.addEventListener("employee_added", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
     text: "Employee record added successfully!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("employee_code_exists", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "The generated employee code already exists. Please click save again to generate a new one.",
     pos: "top-right",
     duration: 10000
   });
@@ -4673,6 +4679,13 @@ window.addEventListener("user_approved", function (event) {
 window.addEventListener("employee_type_exists", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
     text: "Position or employee type already exists!",
+    pos: "top-right",
+    duration: 10000
+  });
+});
+window.addEventListener("nothing_to_update_document", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Nothing to update!",
     pos: "top-right",
     duration: 10000
   });
