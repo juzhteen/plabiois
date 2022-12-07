@@ -75,7 +75,7 @@
         <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This
             certification is being issued upon the request of the above named person
             <u>{{ $form_fields->request_purpose }}</u> that may serve her/him best.
-        <p x-data="data()" class="mt-4">
+        <p x-data="enter_date()" class="mt-4">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issued this
             <a @click.prevent @dblclick="toggleEditingState" x-show="!isEditing" x-text="text"
                 class="select-none cursor-pointer underline text-black"></a>
@@ -87,7 +87,7 @@
         </p>
 
         <script>
-            function data() {
+            function enter_date() {
                 return {
                     text: "Double click to enter date",
                     isEditing: false,
