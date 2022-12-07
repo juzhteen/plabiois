@@ -27,11 +27,22 @@
                 </label>
 
                 @if (!$document_id)
-                    <label class="block text-sm mt-4">
-                        <input
-                            class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                            placeholder="File" type="file" wire:model="file" id="file{{ $iteration }}" /><br>
-                    </label>
+                    <div x-data="{ isUploading: false, progress: 0 }" x-on:livewire-upload-start="isUploading = true"
+                        x-on:livewire-upload-finish="isUploading = false"
+                        x-on:livewire-upload-error="isUploading = false"
+                        x-on:livewire-upload-progress="progress = $event.detail.progress">
+                        <!-- File Input -->
+                        <label class="block text-sm mt-4">
+                            <input
+                                class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-blue-400 focus:outline-none focus:shadow-outline-blue dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                                placeholder="File" type="file" wire:model="file" id="file{{ $iteration }}" /><br>
+                        </label>
+
+                        <!-- Progress Bar -->
+                        <div x-show="isUploading">
+                            Uploading: <progress max="100" x-bind:value="progress"></progress>
+                        </div>
+                    </div>
                 @endif
 
             </div>

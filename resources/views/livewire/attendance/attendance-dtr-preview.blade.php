@@ -69,15 +69,19 @@
                                 </th>
                                 @foreach ($employee_dtr_records as $record)
                                     @php
-                                        $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in)->day;
-                                    @endphp
-                                    @php
-                                        $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in)->day;
+                                        if ($record->time_in) {
+                                            $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in)->day;
+                                        }
+                                        if ($record->time_out) {
+                                            $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out)->day;
+                                        }
                                     @endphp
                                     @if (in_array($day_from_attendance, $dates) && $date == $day_from_attendance)
                                         @if ($record->time_in)
                                             @php
-                                                $time_in = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in);
+                                                if($record->time_in){
+                                                    $time_in = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in);
+                                                }
                                             @endphp
                                             <td class="py-1 px-8 text-xs">
                                                 {{ $time_in->format('h:i A') }}
@@ -89,7 +93,9 @@
                                         @endif
                                         @if ($record->time_out)
                                             @php
-                                                $time_out = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out);
+                                                if($record->time_out){
+                                                    $time_out = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out);
+                                                }
                                             @endphp
                                             <td class="py-1 px-8 text-xs">
                                                 {{ $time_out->format('h:i A') }}

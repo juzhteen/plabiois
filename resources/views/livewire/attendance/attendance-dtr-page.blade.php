@@ -98,12 +98,17 @@
                                                     @if ($employee_dtr_record)
                                                         @foreach ($employee_dtr_record as $record)
                                                             @php
-                                                                $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in)->day;
+                                                                if ($record->time_in) {
+                                                                    $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in)->day;
+                                                                }
+                                                                if ($record->time_out) {
+                                                                    $day_from_attendance = Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out)->day;
+                                                                }
                                                             @endphp
                                                             @if (in_array($day_from_attendance, $dates) && $date == $day_from_attendance)
                                                                 @if ($record->time_in)
                                                                     @php
-                                                                        if($record->time_in){
+                                                                        if ($record->time_in) {
                                                                             $time_in = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_in);
                                                                         }
                                                                         
@@ -115,7 +120,9 @@
                                                                 @endif
                                                                 @if ($record->time_out)
                                                                     @php
-                                                                        $time_out = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out);
+                                                                        if ($record->time_out) {
+                                                                            $time_out = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $record->time_out);
+                                                                        }
                                                                     @endphp
                                                                     <span
                                                                         class="bg-red-100 text-sm p-2 rounded-md font-medium">
