@@ -16,7 +16,7 @@ class DocumentsPage extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $document_id, $title, $description, $file, $file_update, $title_update;
+    public $document_id, $title, $description, $file, $file_update, $title_update, $description_update;
     public $total_documents;
     public $openEdit, $openDelete = false;
     public $orderBy = "title";
@@ -52,14 +52,14 @@ class DocumentsPage extends Component
 
         // dd($existing_doc);
 
-        if($existing_doc != 0){
+        if ($existing_doc != 0) {
             $this->dispatchBrowserEvent("existing_document");
-        }else{
+        } else {
             $page = new Document();
             $page->title = $this->title;
             $page->description = $this->description;
             $page->file_name = $this->file->getClientOriginalName();
-            $page->uploaded_by = Auth::user()->id;
+            $page->user_id = Auth::user()->id;
 
             //Store file to file folder in storage
             $this->file->storeAs("documents", $this->file->getClientOriginalName());
@@ -78,48 +78,42 @@ class DocumentsPage extends Component
         $document = Document::where('document_id', '=', $document_id)->first();
         $this->document_id = $document->document_id;
         $this->title = $document->title;
+        $this->title_update = $document->title;
         $this->file_update = $document->file_name;
         $this->description = $document->description;
+        $this->description_update = $document->description;
         $this->openEdit = true;
     }
 
     public function update()
     {
         $this->validate();
-        
-        $doc = Document::where('document_id', $this->document_id)->first();
 
-        $this->file = $this->file ? $this->file : $this->file_update;
-        $doc->title = $this->title;
-        $doc->description = $this->description;
-        $this->title_update = $doc->title;
-        $this->file_update = $doc->file_name;
-
-        if($doc->title != $this->title_update || $doc->file != $this->file_update){
-            $existing_doc = Document::where('title', '=', $this->title)
-            ->orWhere('file_name', '=', $this->file)->first()->count();
-        }
-
-        if($existing_doc != 0 ){
-            $this->dispatchBrowserEvent("existing_document");
-        }else{
-            if (!is_string($this->file)) {
-                $doc->file_name = $this->file->getClientOriginalName();
-                Storage::disk("documents")->delete($this->file_update);
-                $this->file->storeAs(
-                    "documents",
-                    $this->file->getClientOriginalName()
-                );
+        if ($this->title != $this->title_update) {
+            $existing_title = Document::where('title', '=', $this->title)->first();
+            if ($existing_title) {
+                $this->dispatchBrowserEvent("existing_document");
+            } else {
+                $doc = Document::where('document_id', '=', $this->document_id)->first();
+                $doc->title = $this->title;
+                $doc->description = $this->description;
+                $doc->save();
+                $this->dispatchBrowserEvent("document_saved");
+                $this->clear();
+                $this->closeEditModal();
+                $this->iteration++;
             }
-    
+        } else {
+            $doc = Document::where('document_id', '=', $this->document_id)->first();
+            $doc->title = $this->title;
+            $doc->description = $this->description;
             $doc->save();
             $this->dispatchBrowserEvent("document_saved");
+            $this->clear();
+            $this->closeEditModal();
+            $this->iteration++;
         }
 
-        $this->clear();
-        $this->closeEditModal();
-        $this->iteration++;
-        
     }
 
     public function closeEditModal()
@@ -133,6 +127,7 @@ class DocumentsPage extends Component
         $this->title = "";
         $this->description = "";
         $this->file_update = "";
+        $this->title_update = "";
         $this->file = "";
         $this->document_id = null;
     }
@@ -142,40 +137,40 @@ class DocumentsPage extends Component
         return Storage::disk("documents")->download($file);
     }
 
-     //====================DELETE=================================
+    //====================DELETE=================================
 
-     public function openDeleteModal()
-     {
-         $this->openDelete = true;
-     }
- 
-     public function openDelete($document_id)
-     {
-         $document = Document::findOrFail($document_id);
-         $this->document_id = $document->document_id;
-         $this->title = $document->title;
-         $this->openDeleteModal();
-     }
- 
-     public function closeDeleteModal()
-     {
-         $this->clear();
-         $this->openDelete = false;
-     }
- 
-     public function delete()
-     {
-         $document = Document::findOrFail($this->document_id);
-         Storage::disk("documents")->delete($document->file_name);
-         $document->delete();
-         $this->dispatchBrowserEvent("document_deleted");
-         $this->clear();
-         $this->closeDeleteModal();
-     }
- 
-     public function orderby($orderBy, $orderByOrder)
-     {
-         $this->orderBy = $orderBy;
-         $this->orderByOrder = $orderByOrder;
-     }
+    public function openDeleteModal()
+    {
+        $this->openDelete = true;
+    }
+
+    public function openDelete($document_id)
+    {
+        $document = Document::findOrFail($document_id);
+        $this->document_id = $document->document_id;
+        $this->title = $document->title;
+        $this->openDeleteModal();
+    }
+
+    public function closeDeleteModal()
+    {
+        $this->clear();
+        $this->openDelete = false;
+    }
+
+    public function delete()
+    {
+        $document = Document::findOrFail($this->document_id);
+        Storage::disk("documents")->delete($document->file_name);
+        $document->delete();
+        $this->dispatchBrowserEvent("document_deleted");
+        $this->clear();
+        $this->closeDeleteModal();
+    }
+
+    public function orderby($orderBy, $orderByOrder)
+    {
+        $this->orderBy = $orderBy;
+        $this->orderByOrder = $orderByOrder;
+    }
 }

@@ -2,17 +2,15 @@
 <div class="mt-8 flex">
     <div class="w-2/6 bg-green-300 p-1 m-1 flex justify-center flex-col items-center">
         <b>Sangguniang Barangay</b>
-        <b>
-            @php
-                $bc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
-                    ->where('employee_types.position', 'Barangay Chairman')
-                    ->first();
-                if($bc){
-                    echo $bc->resident->name;
-                }
-            @endphp
-        </b>
-        Barangay Chairman
+        <b>Barangay Chairman</b>
+        @php
+            $bc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
+                ->where('employee_types.position', 'Barangay Chairman')
+                ->first();
+            if ($bc) {
+                echo $bc->resident->name;
+            }
+        @endphp
 
         <b>Barangay Kagawad</b>
 
@@ -22,47 +20,45 @@
                 ->get();
         @endphp
 
-        @if($bks)
+        @if ($bks)
             @foreach ($bks as $bk)
-                <span>{{ $bk->resident->name }}</span>
+                @if ($bk->resident)
+                    <span>{{ $bk->resident->name }}</span>
+                @endif
             @endforeach
         @endif
 
-        <b>
-            @php
-                $skc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
-                    ->where('employee_types.position', 'SK Chairman')
-                    ->first();
-                if ($skc) {
-                    echo $skc->resident->name;
-                }
-            @endphp
-        </b>
-        Sk Chairman
+        <b>Sk Chairman</b>
 
-        <b>
-            @php
-                $bs = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
-                    ->where('employee_types.position', 'Barangay Secretary')
-                    ->first();
-                if ($bs) {
-                    echo $bs->resident->name;
-                }
-            @endphp
-        </b>
-        Barangay Secretary
+        @php
+            $skc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
+                ->where('employee_types.position', 'SK Chairman')
+                ->first();
+            if ($skc) {
+                echo $skc->resident->name;
+            }
+        @endphp
 
-        <b>
-            @php
-                $bt = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
-                    ->where('employee_types.position', 'Barangay Treasurer')
-                    ->first();
-                if ($bt) {
-                    echo $bt->resident->name;
-                }
-            @endphp
-        </b>
-        Barangay Treasurer
+        <b>Barangay Secretary</b>
+
+        @php
+            $bs = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
+                ->where('employee_types.position', 'Barangay Secretary')
+                ->first();
+            if ($bs) {
+                echo $bs->resident->name;
+            }
+        @endphp
+        <b>Barangay Treasurer</b>
+
+        @php
+            $bt = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
+                ->where('employee_types.position', 'Barangay Treasurer')
+                ->first();
+            if ($bt) {
+                echo $bt->resident->name;
+            }
+        @endphp
     </div>
     <div class="w-4/6 p-1 m-1 text-justify relative">
         <img src="{{ asset('img/plabio-logo.png') }}" alt="PLabio logo" class="absolute opacity-25 top-12" width="100%">
@@ -77,8 +73,7 @@
             character nor has been involved in any crime against moral turpitude nor has pending case of this barangay.
         </p>
         <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This
-            certification is being issued upon the request of the above named person for
-            <u>{{ $form_fields->request_purpose }}</u> that may serve her/him best.
+            certification is being issued upon the request of the above named person <u>{{ $form_fields->request_purpose }}</u> that may serve her/him best.
         <p class="mt-4">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issued this
             {{ now()->day }} of {{ now()->format('F') }}, {{ now()->year }} at the Office of the Barangay Chairman,
@@ -112,7 +107,9 @@
                 $bc = App\Models\Employee::join('employee_types', 'employees.employee_type_employee_type_id', '=', 'employee_types.employee_type_id')
                     ->where('employee_types.position', 'Barangay Chairman')
                     ->first();
-                echo $bc->resident->name;
+                if ($bc) {
+                    echo $bc->resident->name;
+                }
             @endphp
         </p>
         <p class="text-right">Punong Barangay</p>

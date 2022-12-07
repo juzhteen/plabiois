@@ -9,7 +9,7 @@
     certify that the above mentioned named is a/an <u>{{ $form_fields->request_occupation }}</u>.</p>
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This
     certification is being issued to <u>{{ $request->resident->name }}</u> <u
-        class="lowercase">{{ $form_fields->request_purpose }}</u>.</p>
+        class="">{{ $form_fields->request_purpose }}</u>.</p>
 <p class="mt-4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Issued this
     {{ now()->day }} of {{ now()->format('F') }}, {{ now()->year }} at the Office of the Barangay Chairman,
     Barangay Paulino Labio, Northern Kabuntalan, Maguindanao.</p>

@@ -27,7 +27,8 @@ class DatabaseSeeder extends Seeder
             "Barangay Clearance",
             "Case Invitation",
             "Certificate of Indigency",
-            "Certificate of Low Income"
+            "Certificate of Low Income",
+            "Barangay Residency"
         ];
 
         foreach ($forms as $form){

@@ -4,18 +4,7 @@
     @include('livewire.users.user-delete-modal')
       <!-- Cards -->
       <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-        <!-- Card -->
-        {{-- <div class="flex items-center p-4 bg-green-500 text-white rounded-lg shadow-xs dark:bg-green-800 cursor-pointer font-bold" wire:click.prevent="toggleEdit()">
-          <div class="p-3 mr-4 text-green-500 bg-white rounded-full dark:text-green-100 dark:bg-green-500">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-            </svg>
-          </div>
-          <div>
-            ADD NEW POSITION
-          </div>
-        </div> --}}
-        <!-- Card -->
+
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
           <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -27,7 +16,7 @@
               @if($users->count() == 1)
                 1 user
               @else
-                {{ $users->count() }} employee types or positions
+                {{ $users->count() }} users
               @endif
             </p>
           </div>

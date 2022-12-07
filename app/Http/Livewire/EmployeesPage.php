@@ -171,10 +171,7 @@ class EmployeesPage extends Component
                 // Check if employee code already exists
                 $employee_code_record = Employee::where("employee_code", $employee_code)->first();
                 if($employee_code_record){
-                    session()->flash(
-                        "message",
-                        "The generated employee code already exists. Please click save again to generate a new one."
-                    );
+                    $this->dispatchBrowserEvent("employee_code_exists");
                 }else{
                     $this->validate();
                     

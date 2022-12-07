@@ -20,7 +20,7 @@ class RequestsForms extends Component
     public $full_name;
     public $years_of_residency;
     public $occupation;
-    public $purpose;
+    public $purpose = 'for ';
     public $date_of_birth;
     public $mother_name;
     public $income;
