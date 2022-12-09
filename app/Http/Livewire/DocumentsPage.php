@@ -37,8 +37,10 @@ class DocumentsPage extends Component
     {
 
         $documents = $this->search
-            ? Document::where($this->searchBy, 'like', '%' . $this->search . '%')->paginate(10)
-            : Document::paginate(10);
+            ? Document::where($this->searchBy, 'like', '%' . $this->search . '%')
+                ->orderBy($this->orderBy, $this->orderByOrder)
+                ->paginate(10)
+            : Document::orderBy($this->orderBy, $this->orderByOrder)->paginate(10);
 
         $this->total_documents = Document::all()->count();
 
