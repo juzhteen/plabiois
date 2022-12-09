@@ -20,10 +20,10 @@ class EmployeesPage extends Component
     public $residentQuery, $residentQueryResult;
     public $positionQuery, $positionQueryResult;
 
-    public $orderBy = "residents.name";
-    public $orderByOrder = "asc";
-    public $search = "";
-    public $searchBy;
+    public $orderBy = 'residents.name';
+    public $orderByOrder = 'asc';
+    public $search = '';
+    public $searchBy = 'residents.name';
 
     protected $rules = [
         'resident_id' => 'required',
@@ -39,7 +39,7 @@ class EmployeesPage extends Component
         $this->positionQuery = "";
         $this->positionQueryResult = [];
 
-        $this->searchBy = "all";
+        $this->searchBy = "residents.name";
     }
 
     public function render()
@@ -53,11 +53,7 @@ class EmployeesPage extends Component
         }
 
         $employees = $this->search
-            ? Employee::where("residents.name", "like", "%" . $this->search . "%")
-                ->orWhere("employee_types.position", "like", "%" . $this->search . "%")
-                ->orWhere("term_start", "like", "%" . $this->search . "%")
-                ->orWhere("term_end", "like", "%" . $this->search . "%")
-                ->join(
+            ? Employee::join(
                 "residents",
                 "employees.resident_resident_id",
                 "=",
@@ -70,6 +66,7 @@ class EmployeesPage extends Component
                     "employee_types.employee_type_id"
                 )
                 ->orderBy($this->orderBy, $this->orderByOrder)
+                ->where($this->searchBy, "like", "%" . $this->search . "%")
                 ->paginate(10)
             : Employee::join(
                 "residents",
