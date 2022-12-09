@@ -58,7 +58,6 @@
                         <th class="px-4 py-3">
                             <span class="flex flex-col">
                                 Uploaded by
-                                <div class="flex flex-row">@include('livewire.includes.order-by', ['field' => 'uploaded_by'])</div>
                             </span>
                         </th>
                         <th class="px-4 py-3">Actions</th>
