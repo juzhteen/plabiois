@@ -19,10 +19,10 @@ class DocumentsPage extends Component
     public $document_id, $title, $description, $file, $file_update, $title_update, $description_update;
     public $total_documents;
     public $openEdit, $openDelete = false;
-    public $orderBy = "title";
-    public $orderByOrder = "asc";
+    public $orderBy = 'title';
+    public $orderByOrder = 'asc';
     public $search = "";
-    public $searchBy;
+    public $searchBy = 'title';
     public $iteration;
 
     public function rules()
@@ -37,7 +37,7 @@ class DocumentsPage extends Component
     {
 
         $documents = $this->search
-            ? Document::where($this->searchBy, "like", "%" . $this->search . "%")->paginate(10)
+            ? Document::where($this->searchBy, 'like', '%' . $this->search . '%')->paginate(10)
             : Document::paginate(10);
 
         $this->total_documents = Document::all()->count();

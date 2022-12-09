@@ -5,7 +5,7 @@
               <label class="dark:text-white mr-5">Search by</label>
               <select
                   class="mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
-                  wire:model.debounce.2000ms="searchBy">
+                  wire:model="searchBy">
                   @foreach ($fields as $key => $field)
                       <option value="{{ $key }}">{{ $field }}</option>
                   @endforeach
