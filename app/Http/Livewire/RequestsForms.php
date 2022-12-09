@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\Resident;
 use App\Models\Form;
 use App\Models\Request;
+use Carbon\Carbon;
 
 class RequestsForms extends Component
 {
@@ -78,6 +79,7 @@ class RequestsForms extends Component
                     "resident_resident_id" => $this->resident_id,
                     "form_form_id" => $this->form_id,
                     "request_date" => now()->toDateTimeString(),
+                    'expiration_date' => Carbon::createFromFormat('Y-m-d H:i:s', now()->toDateTimeString())->addMonths(6),
                     "form_fields" => json_encode($this->generate_fields_in_json())
                 ]);
                 $this->request_sent_successfully = true;
