@@ -35,7 +35,11 @@ class DocumentsPage extends Component
 
     public function render()
     {
-        $documents = Document::paginate(10);
+
+        $documents = $this->search
+            ? Document::where($this->searchBy, "like", "%" . $this->search . "%")->paginate(10)
+            : Document::paginate(10);
+
         $this->total_documents = Document::all()->count();
 
         return view('livewire.documents.documents-page', ['documents' => $documents]);

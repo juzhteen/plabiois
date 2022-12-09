@@ -26,8 +26,7 @@
         'fields' => [
             'title' => 'Title',
             'description' => 'Description',
-            'file_name' => 'File name',
-            'uploaded_by' => 'Uploaded by',
+            'file_name' => 'File name'
         ],
     ])
 
