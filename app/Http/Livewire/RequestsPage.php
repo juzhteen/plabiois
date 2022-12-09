@@ -29,8 +29,6 @@ class RequestsPage extends Component
         $requests = $this->search
             ? Request::where("residents.name", "like", "%" . $this->search . "%")
                 ->orWhere("forms.form_name", "like", "%" . $this->search . "%")
-                ->orWhere("request_date", "like", "%" . $this->search . "%")
-                ->orWhere("expiration_date", "like", "%" . $this->search . "%")
                 ->join(
                     "residents",
                     "requests.resident_resident_id",

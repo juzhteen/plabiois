@@ -110,10 +110,10 @@
                                 {{ $request->form->form_name }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $request->request_date }}
+                                {{ date('F j, Y', strtotime($request->request_date)) }}
                             </td>
                             <td class="px-4 py-3 text-sm">
-                                {{ $request->expiration_date }}
+                                {{ date('F j, Y', strtotime($request->expiration_date)) }}
                             </td>
                             <td class="px-4 py-3 text-sm">
                                 {{ $request->accepted ? "Yes" : "No" }}
