@@ -29,8 +29,8 @@
     </div>
 
     @include('livewire.includes.search', ["fields" => [
-        "residents.name" => "Name",
-        "forms.form_name" => "Form"
+        "forms.form_name" => "Form",
+        "residents.name" => "Name"
     ]])
 
 <div class="flex justify-between shadow-xs p-3 rounded-lg mb-5 mt-10">
