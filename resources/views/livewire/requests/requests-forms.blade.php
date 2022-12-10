@@ -3,7 +3,7 @@
     <section class="text-gray-600 body-font">
         @if ($request_sent_successfully)
             <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
-                <h1 class="title-font font-medium text-2xl text-gray-900">We have received your text! The Secretary will text you when your requested document is ready for pick up</h1>
+                <h1 class="title-font font-medium text-2xl text-gray-900">We have received your request! The Secretary will text you when your requested document is ready for pick up</h1>
             </div>
         @else
             <div class="container px-5 py-24 mx-auto flex flex-wrap items-center">
