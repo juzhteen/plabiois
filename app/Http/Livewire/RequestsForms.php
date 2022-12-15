@@ -33,6 +33,7 @@ class RequestsForms extends Component
     public $residentQuery, $residentQueryResult;
     public $resident_id;
     public $request_id;
+    public $residentBdate;
 
     public function mount()
     {
@@ -42,11 +43,11 @@ class RequestsForms extends Component
 
     public function render()
     {
-        if($this->residentQuery == ""){
+        if ($this->residentQuery == "") {
             $this->residentQueryResult = [];
         }
 
-        if($this->form_name){
+        if ($this->form_name) {
             $form = Form::where("form_name", $this->form_name)->first();
             $this->form_id = $form->form_id;
         }
@@ -56,7 +57,7 @@ class RequestsForms extends Component
 
     public function updatedResidentQuery()
     {
-        $this->residentQueryResult = Resident::where("name", "like", "%". $this->residentQuery ."%")->get();
+        $this->residentQueryResult = Resident::where("name", "like", "%" . $this->residentQuery . "%")->get();
     }
 
     public function setResidentProfile($resident)
@@ -65,25 +66,32 @@ class RequestsForms extends Component
         $this->resident_id = $resident["resident_id"];
         $this->residentQueryResult = [];
         $this->full_name = $resident["name"];
+        $this->residentBdate = $resident["birthdate"];
     }
 
     public function send_request()
     {
 
         $this->check_fields_if_empty();
-        if($this->no_empty_fields){
-            Request::updateOrCreate(
-                ["request_id" => $this->request_id],
-                [
-                    "request_id" => $this->request_id,
-                    "resident_resident_id" => $this->resident_id,
-                    "form_form_id" => $this->form_id,
-                    "request_date" => now()->toDateTimeString(),
-                    'expiration_date' => Carbon::createFromFormat('Y-m-d H:i:s', now()->toDateTimeString())->addMonths(6),
-                    "form_fields" => json_encode($this->generate_fields_in_json())
-                ]);
+        if ($this->no_empty_fields) {
+            // Check birthdate
+            if ($this->date_of_birth == $this->residentBdate) {
+                Request::updateOrCreate(
+                    ["request_id" => $this->request_id],
+                    [
+                        "request_id" => $this->request_id,
+                        "resident_resident_id" => $this->resident_id,
+                        "form_form_id" => $this->form_id,
+                        "request_date" => now()->toDateTimeString(),
+                        'expiration_date' => Carbon::createFromFormat('Y-m-d H:i:s', now()->toDateTimeString())->addMonths(6),
+                        "form_fields" => json_encode($this->generate_fields_in_json())
+                    ]
+                );
                 $this->request_sent_successfully = true;
-        }else{
+            }else{
+                $this->dispatchBrowserEvent("invalid_resident");
+            }
+        } else {
             $this->dispatchBrowserEvent("barangay_certification_empty_fields");
         }
     }
@@ -91,7 +99,7 @@ class RequestsForms extends Component
     public function generate_fields_in_json()
     {
 
-        if($this->form_name == "Barangay Certification"){
+        if ($this->form_name == "Barangay Certification") {
             $request_name = $this->full_name;
             $request_years = $this->years_of_residency;
             $request_occupation = $this->occupation;
@@ -100,7 +108,7 @@ class RequestsForms extends Component
             return compact("request_name", "request_years", "request_occupation", "request_purpose", "contact_number");
         }
 
-        if($this->form_name == "Barangay Clearance"){
+        if ($this->form_name == "Barangay Clearance") {
             $request_name = $this->full_name;
             $request_date_of_birth = $this->date_of_birth;
             $request_purpose = $this->purpose;
@@ -108,7 +116,7 @@ class RequestsForms extends Component
             return compact("request_name", "request_date_of_birth", "request_purpose", "contact_number");
         }
 
-        if($this->form_name == "Certificate of Low Income"){
+        if ($this->form_name == "Certificate of Low Income") {
             $request_name = $this->full_name;
             $request_date_of_birth = $this->date_of_birth;
             $request_mother_name = $this->mother_name;
@@ -117,7 +125,7 @@ class RequestsForms extends Component
             return compact("request_name", "request_date_of_birth", "request_mother_name", "request_income", "contact_number");
         }
 
-        if($this->form_name == "Certificate of Indigency"){
+        if ($this->form_name == "Certificate of Indigency") {
             $request_name = $this->full_name;
             $request_date_of_birth = $this->date_of_birth;
             $contact_number = $this->contact_number;
@@ -125,7 +133,7 @@ class RequestsForms extends Component
             return compact("request_name", "request_purpose", "request_date_of_birth", "contact_number");
         }
 
-        if($this->form_name == "Case Invitation"){
+        if ($this->form_name == "Case Invitation") {
             $request_name = $this->full_name;
             $request_complainants = $this->complainants;
             $request_respondents = $this->respondents;
@@ -134,7 +142,7 @@ class RequestsForms extends Component
             return compact("request_name", "request_complainants", "request_respondents", "request_date", "contact_number");
         }
 
-        if($this->form_name == "Barangay Residency"){
+        if ($this->form_name == "Barangay Residency") {
             $request_name = $this->full_name;
             $request_date_of_birth = $this->date_of_birth;
             $contact_number = $this->contact_number;
@@ -146,50 +154,50 @@ class RequestsForms extends Component
 
     public function check_fields_if_empty()
     {
-        if($this->form_name == "Barangay Certification"){
-            if($this->resident_id == null || $this->years_of_residency == null || $this->occupation == "" || $this->purpose == "" ){
+        if ($this->form_name == "Barangay Certification") {
+            if ($this->resident_id == null || $this->years_of_residency == null || $this->occupation == "" || $this->purpose == "" || $this->date_of_birth == "") {
                 $this->no_empty_fields = false;
-            }else{
+            } else {
                 $this->no_empty_fields = true;
             }
         }
 
-        if($this->form_name == "Barangay Clearance"){
-            if($this->resident_id == null || $this->date_of_birth == null || $this->purpose == "" ){
+        if ($this->form_name == "Barangay Clearance") {
+            if ($this->resident_id == null || $this->date_of_birth == null || $this->purpose == "" || $this->date_of_birth == "") {
                 $this->no_empty_fields = false;
-            }else{
+            } else {
                 $this->no_empty_fields = true;
             }
         }
 
-        if($this->form_name == "Certificate of Low Income"){
-            if($this->resident_id == null || $this->mother_name == "" || $this->date_of_birth == "" || $this->income == "" ){
+        if ($this->form_name == "Certificate of Low Income") {
+            if ($this->resident_id == null || $this->mother_name == "" || $this->date_of_birth == "" || $this->income == "" || $this->date_of_birth == "") {
                 $this->no_empty_fields = false;
-            }else{
+            } else {
                 $this->no_empty_fields = true;
             }
         }
 
-        if($this->form_name == "Certificate of Indigency"){
-            if($this->resident_id == null || $this->date_of_birth == "" || $this->purpose == ""){
+        if ($this->form_name == "Certificate of Indigency") {
+            if ($this->resident_id == null || $this->date_of_birth == "" || $this->purpose == "" || $this->date_of_birth == "") {
                 $this->no_empty_fields = false;
-            }else{
+            } else {
                 $this->no_empty_fields = true;
             }
         }
 
-        if($this->form_name == "Case Invitation"){
-            if($this->resident_id == null || $this->complainants == "" || $this->respondents == "" || $this->invitation_date == ""){
+        if ($this->form_name == "Case Invitation") {
+            if ($this->resident_id == null || $this->complainants == "" || $this->respondents == "" || $this->invitation_date == "" || $this->date_of_birth == "") {
                 $this->no_empty_fields = false;
-            }else{
+            } else {
                 $this->no_empty_fields = true;
             }
         }
 
-        if($this->form_name == "Barangay Residency"){
-            if($this->resident_id == null || $this->date_of_birth == "" || $this->purpose == ""){
+        if ($this->form_name == "Barangay Residency") {
+            if ($this->resident_id == null || $this->date_of_birth == "" || $this->purpose == "" || $this->date_of_birth == "") {
                 $this->no_empty_fields = false;
-            }else{
+            } else {
                 $this->no_empty_fields = true;
             }
         }

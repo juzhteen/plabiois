@@ -72,6 +72,12 @@
                                         placeholder="Purpose">
                                 </div>
                                 <div class="relative mb-4">
+                                    <label for="contact_number" class="leading-7 text-sm text-gray-600">Date of birth</label>
+                                    <input type="date" id="birthdate" wire:model="date_of_birth"
+                                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        placeholder="Date of birth">
+                                </div>
+                                <div class="relative mb-4">
                                     <label for="contact_number" class="leading-7 text-sm text-gray-600">Contact
                                         number</label>
                                     <input type="text" id="contact_number" wire:model="contact_number"
@@ -171,6 +177,12 @@
                                         class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                                 <div class="relative mb-4">
+                                    <label for="contact_number" class="leading-7 text-sm text-gray-600">Date of birth</label>
+                                    <input type="date" id="birthdate" wire:model="date_of_birth"
+                                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        placeholder="Date of birth">
+                                </div>
+                                <div class="relative mb-4">
                                     <label for="contact_number" class="leading-7 text-sm text-gray-600">Contact
                                         number</label>
                                     <input type="text" id="contact_number" wire:model="contact_number"
@@ -226,6 +238,12 @@
                                         class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
                                 </div>
                                 <div class="relative mb-4">
+                                    <label for="contact_number" class="leading-7 text-sm text-gray-600">Date of birth</label>
+                                    <input type="date" id="birthdate" wire:model="date_of_birth"
+                                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        placeholder="Date of birth">
+                                </div>
+                                <div class="relative mb-4">
                                     <label for="contact_number" class="leading-7 text-sm text-gray-600">Contact
                                         number</label>
                                     <input type="text" id="contact_number" wire:model="contact_number"
@@ -262,16 +280,16 @@
                                     @endif
                                 </div>
                                 <div class="relative mb-4">
-                                    <label for="date-of-birth"
-                                        class="leading-7 text-sm text-gray-600">Birthdate</label>
-                                    <input type="date" id="date-of-birth" wire:model="date_of_birth"
-                                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
-                                </div>
-                                <div class="relative mb-4">
                                     <label for="purpose" class="leading-7 text-sm text-gray-600">Purpose</label>
                                     <input type="text" id="purpose" wire:model="purpose"
                                         class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                                         placeholder="Purpose">
+                                </div>
+                                <div class="relative mb-4">
+                                    <label for="contact_number" class="leading-7 text-sm text-gray-600">Date of birth</label>
+                                    <input type="date" id="birthdate" wire:model="date_of_birth"
+                                        class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+                                        placeholder="Date of birth">
                                 </div>
                                 <div class="relative mb-4">
                                     <label for="contact_number" class="leading-7 text-sm text-gray-600">Contact

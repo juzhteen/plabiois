@@ -4613,6 +4613,13 @@ window.addEventListener("barangay_certification_empty_fields", function (event) 
     duration: 10000
   });
 });
+window.addEventListener("invalid_resident", function (event) {
+  node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
+    text: "Invalid resident profile selected. Please provide correct birthdate to proceed.",
+    pos: "top-right",
+    duration: 10000
+  });
+});
 window.addEventListener("request_deleted", function (event) {
   node_snackbar__WEBPACK_IMPORTED_MODULE_2___default().show({
     text: "Request record deleted successfully!",

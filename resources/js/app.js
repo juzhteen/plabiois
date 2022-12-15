@@ -203,6 +203,14 @@ window.addEventListener("barangay_certification_empty_fields", (event) => {
     });
 });
 
+window.addEventListener("invalid_resident", (event) => {
+    Snackbar.show({
+        text: "Invalid resident profile selected. Please provide correct birthdate to proceed.",
+        pos: "top-right",
+        duration: 10000,
+    });
+});
+
 window.addEventListener("request_deleted", (event) => {
     Snackbar.show({
         text: "Request record deleted successfully!",
