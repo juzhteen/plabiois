@@ -21,6 +21,7 @@ class Resident extends Model
         "weight",
         "height",
         "purok",
+        "birthdate",
         "email_address",
         "phone_number"
     ];

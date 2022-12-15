@@ -146,6 +146,17 @@
                         placeholder="Phone number" type="text" wire:model="phone_number" id="phone_number" />
                 </label>
 
+                <label class="block text-sm mt-4">
+                    <span class="text-gray-700 dark:text-gray-400">
+                        Birthdate @error('birthdate')
+                            <span class="text-red-500"> | Invalid birthdate </span>
+                        @enderror
+                    </span>
+                    <input
+                        class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                        placeholder="Birthdate" type="date" wire:model="birthdate" id="birthdate" />
+                </label>
+
             </div>
             <footer
                 class="flex flex-col items-center justify-end px-6 py-3 -mx-6 -mb-4 space-y-4 sm:space-y-0 sm:space-x-6 sm:flex-row bg-gray-50 dark:bg-gray-800">

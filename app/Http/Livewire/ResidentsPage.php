@@ -14,7 +14,7 @@ class ResidentsPage extends Component
 {
     use WithPagination;
 
-    public $resident_id, $name, $age, $gender, $civil_status, $religion, $weight, $height, $purok, $email_address, $phone_number;
+    public $resident_id, $name, $age, $gender, $civil_status, $religion, $weight, $height, $purok, $email_address, $phone_number, $birthdate;
     public $openEdit, $openDelete = false;
 
     public $orderBy = "name";
@@ -30,7 +30,8 @@ class ResidentsPage extends Component
         'religion' => 'required',
         'weight' => 'required|integer',
         'height' => 'required|integer',
-        'purok' => 'required|integer|min:1|max:7'
+        'purok' => 'required|integer|min:1|max:7',
+        'birthdate' => 'required'
     ];
 
     public function mount()
@@ -52,6 +53,7 @@ class ResidentsPage extends Component
                     ->orWhere("purok", "=", $this->search)
                     ->orWhere("email_address", "like", "%" . $this->search . "%")
                     ->orWhere("phone_number", "like", "%" . $this->search . "%")
+                    ->orWhere("birthdate", "=", $this->search)
                     ->orderBy($this->orderBy, $this->orderByOrder)
                     ->paginate(10)
                 : Resident::orderBy($this->orderBy, $this->orderByOrder)
@@ -89,6 +91,7 @@ class ResidentsPage extends Component
         $this->purok = $resident->purok;
         $this->email_address = $resident->email_address;
         $this->phone_number = $resident->phone_number;
+        $this->birthdate = $resident->birthdate;
         $this->openEdit = true;
     }
 
@@ -115,7 +118,8 @@ class ResidentsPage extends Component
                 "height" => $this->height,
                 "purok" => $this->purok,
                 "email_address" => $this->email_address,
-                "phone_number" => $this->phone_number
+                "phone_number" => $this->phone_number,
+                "birthdate" => $this->birthdate
             ]
         );
         $this->resident_id ? $this->dispatchBrowserEvent("resident_updated") : $this->dispatchBrowserEvent("resident_added");
@@ -193,6 +197,7 @@ class ResidentsPage extends Component
         $this->purok = "";
         $this->email_address = "";
         $this->phone_number = "";
+        $this->birthdate = "";
         $this->resetValidation();
     }
 

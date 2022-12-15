@@ -23,6 +23,7 @@ class CreateResidentsTable extends Migration
             $table->string("weight");
             $table->string("height");
             $table->string("purok");
+            $table->date("birthdate");
             $table->timestamps();
         });
     }

@@ -43,7 +43,8 @@
       "height" => "Height",
       "purok" => "Purok",
       "email_address" => "Email address",
-      "phone_number" => "Phone number"
+      "phone_number" => "Phone number",
+      "birthdate" => "Birthdate"
     ]])
   
     <!-- New Table -->
@@ -102,6 +103,12 @@
               </th>
               <th class="px-4 py-3">
                 <span class="flex flex-col">
+                  Birthdate
+                  <div class="flex flex-row">@include('livewire.includes.order-by', ["field" => 'birthdate'])</div>
+                </span>
+              </th>
+              <th class="px-4 py-3">
+                <span class="flex flex-col">
                   Email address
                   <div class="flex flex-row">@include('livewire.includes.order-by', ["field" => 'email_address'])</div>
                 </span>
@@ -141,6 +148,9 @@
                   </td>
                   <td class="px-4 py-3 text-sm">
                     Purok {{ $resident->purok }}
+                  </td>
+                  <td class="px-4 py-3 text-sm">
+                    {{ $resident->birthdate }}
                   </td>
                   <td class="px-4 py-3 text-sm">
                     {{ $resident->email_address }}
